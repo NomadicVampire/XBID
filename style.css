@@ -11,7 +11,7 @@ body::before{
     z-index: -1;
     top: 0px;
     position: absolute;
-    background: url('/static/bg.jpg') no-repeat center center;
+    background: url('bg.jpg') no-repeat center center;
 }
 h2{
     margin: 18px;
