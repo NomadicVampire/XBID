@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&family=Lobster&display=swap');
 *{
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
+    font-family: 'Lobster', cursive;
+
 }
 body::before{
     opacity: 0.5;
@@ -11,7 +14,7 @@ body::before{
     z-index: -1;
     top: 0px;
     position: absolute;
-    background: url('bg.jpg') no-repeat center center;
+    background: url('trial.jpg') no-repeat center center;
 }
 h2{
     margin: 18px;
@@ -19,9 +22,9 @@ h2{
     color: rgb(23, 23, 39);
     background-color: beige;
     text-align: center;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 ul{
+    font-family: 'Hachi Maru Pop', cursive;
     display: flex;
     background-color: rgb(124, 120, 120);
 }
@@ -34,6 +37,7 @@ ul{
 }
 
 li{
+    
     list-style: none;
     padding: 7px;
     margin: 10px;
@@ -53,6 +57,8 @@ input, textarea{
     border-radius: 7px;
     outline: none;
     text-align: center;
+    font-family: 'Roboto Slab', serif;
+
 }
 .btn{
     margin: 4px auto;
