@@ -42,7 +42,7 @@
 </head>
 <body>
 <div class="login-form">
-    <form action="/examples/actions/confirmation.php" method="post">
+    <form action="/includes/onwersignup.inc.php" method="post">
         <h2 class="text-center">Owner Login</h2>       
         <div class="form-group">
             <input type="text" class="form-control" placeholder="Username" required="required">

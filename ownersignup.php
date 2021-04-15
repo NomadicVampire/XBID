@@ -87,15 +87,15 @@ body {
 </head>
 <body>
 <div class="signup-form">
-    <form action="/examples/actions/confirmation.php" method="post">
+    <form action="includes/ownersignup.inc.php" method="post">
 		<h2>Owner Sign Up</h2>
 		<p>It's free and only takes a minute.</p>
 		<hr>
         <div class="form-group">
-        	<input type="text" class="form-control" name="username" placeholder="Name" required="required">
+        	<input type="text" class="form-control" name="name" placeholder="Name" required="required">
         </div>
         <div class="form-group">
-        	<input type="text" class="form-control" name="name" placeholder="Teamname" required="required">
+        	<input type="text" class="form-control" name="teamname" placeholder="Teamname" required="required">
         </div>
         <div class="form-group">
         	<input type="email" class="form-control" name="email" placeholder="Email Address" required="required">
@@ -110,7 +110,7 @@ body {
             <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" required="required">
         </div>
 		<div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block btn-lg">Sign Up</button>
+            <button type="submit" name = "submit" class="btn btn-primary btn-block btn-lg">Sign Up</button>
         </div>
 		<p class="small text-center">By clicking the Sign Up button, you agree to our <br><a href="#">Terms &amp; Conditions</a>, and <a href="#">Privacy Policy</a>.</p>
     </form>
