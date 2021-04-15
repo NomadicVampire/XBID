@@ -93,7 +93,7 @@ body {
 </head>
 <body>
 <div class="signup-form">
-    <form action="/examples/actions/confirmation.php" method="post">
+    <form action="includes/signup.inc.php" method="post">
 		<h2>User Sign Up</h2>
 		<p>It's free and only takes a minute.</p>
 		<hr>
@@ -104,29 +104,75 @@ body {
         	<input type="text" class="form-control" name="ign" placeholder="In Game Name (IGN)" required="required">
         </div>
         <div class="form-group">
-        	<input type="text" class="form-control" name="gender" placeholder="Gender" required="required">
+		<select name="gender" id="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Others">Others</option>
+    </select>
+		 
         </div>
         <div class="form-group">
         	<input type="email" class="form-control" name="email" placeholder="Email Address" required="required">
         </div>
         <div class="form-group">
-        	<input type="email" class="form-control" name="email" placeholder="Contact Details" required="required">
+        	<input type="text" class="form-control" name="contact" placeholder="Contact Details" required="required">
         </div>
         <div class="form-group">
-        	<input type="email" class="form-control" name="email" placeholder="Experience" required="required">
+		<select name="experience" id="experience">
+        <option value="silver">Silver</option>
+        <option value="gold">Gold</option>
+        <option value="diamond">Diamond</option>
+    </select>
         </div>
 		<div class="form-group">
-            <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+            <input type="password" class="form-control" name="pwd" placeholder="Password" required="required">
         </div>
 		<div class="form-group">
-            <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" required="required">
+            <input type="password" class="form-control" name="conf-pwd" placeholder="Confirm Password" required="required">
         </div>
 		<div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block btn-lg">Sign Up</button>
+            <button type="submit" name='submit-signup' class="btn btn-primary btn-block btn-lg">Sign Up</button>
         </div>
 		<p class="small text-center">By clicking the Sign Up button, you agree to our <br><a href="#">Terms &amp; Conditions</a>, and <a href="#">Privacy Policy</a>.</p>
     </form>
 	<div class="text-center">Already have an account? <a href="../XBID/userlogin.php">Login here</a></div>
 </div>
+<?php
+
+if (isset($_GET['error'])) {
+	if ($_GET['error']== 'emptyinput') {
+	 echo "<p> Required All fields to be Filled </p>";
+	}
+	elseif ($_GET['error']== 'invalidusername') {
+	echo "<p> invalid user nametry again </p>";
+	}
+	elseif ($_GET['error']== 'invalidContact') {
+		echo "<p> invalid contact number try again </p>";
+		}
+	elseif ($_GET['error']== 'invalidemail') {
+	echo "<p> Inout valid email id </p>";
+	}
+	elseif ($_GET['error']== 'passwordmatchInvalid') {
+	echo "<p> passwords did'nt match </p>";
+	}
+	elseif ($_GET['error']== 'stmtFailed1') {
+	echo "<p> STMT-1 failed </p>";
+	}
+	elseif ($_GET['error']== 'stmtFailed2') {
+		echo "<p> STMT-2 failed </p>";
+		}
+	elseif ($_GET['error']== 'IGNExist') {
+	echo "<p> userName already taken try diff one </p>";
+	}
+	elseif ($_GET['error']== 'None') {
+	 echo "<p> You signed up successfully </p>";
+	}
+}
+
+?>
+
+
+
+
 </body>
 </html>
