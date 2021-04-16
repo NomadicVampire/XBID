@@ -149,20 +149,9 @@ function invalidOwnerEmail($email){
     }
     return $result;
 }
-function invalidOwnerContact($cont){
-    $result;
-    if (preg_match('/^\d{10}$/', $cont)) {
-        $cont = '0' . $cont;
-        return $result = true;
-    }
-    else {
-        $result = false;
-    }
-    return $result;
-}
 function OwnerpwdMatch($password, $confirm_password){
     $result;
-    if($password !== $confirm_password){
+    if($pwd !== $pwdRepeat){
         $result = true;
     }
     else{
@@ -176,7 +165,7 @@ function OwneruidExists($conn, $teamname, $email){
     $stmt = mysqli_stmt_init($conn);    // Prepared Statement
     
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        header("location: ../ownersignup.php?error=stmtFailed1");
+        header("location: ../onwersignup.php?error=stmtfailed");
         exit();
     }
     // now if this not fails then we pass data through argument to chechk whether username exists or not.
@@ -209,7 +198,7 @@ function createOwner($conn,$name,$teamname,$email,$contact,$password){
     $stmt = mysqli_stmt_init($conn);    // Prepared Statement
 
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        header("location: ../ownersignup.php?error=stmtFailed2");
+        header("location: ../ownersignup.php?error=stmtfailed");
     }
 
     // Hashed password for secuirity purpose
@@ -227,44 +216,3 @@ function createOwner($conn,$name,$teamname,$email,$contact,$password){
     exit();
 
 }
-
-//   -------------------------------------------------------------------------------------------------------------------------------------
-//                                                              LOGIN USER
-//   -------------------------------------------------------------------------------------------------------------------------------------
-
-
-function emptyUserLogin($userIGN, $userPwd){
-    $result;
-    if (empty($userIGN)||empty($userPwd)) {
-        $result= true;
-    }
-    else {
-        $result = false;
-    }
-    return $result;
-}
-
-function loginUser($conn, $userIGN, $userPwd){
-    $InGameExists = IGNExists($conn, $userIGN, $userEmail);
-
-    if ($InGameExists=== false) {
-        header('location: ../userlogin.php?error=wronglogin1');
-        exit();
-    }
-
-    $passHashedUser = $InGameExists["userPassword"];
-    $checkPassUser = password_verify($userPwd, $passHashedUser);
-
-    if ($checkPassUser === false) {
-        header('location: ../userlogin.php?error=wronglogin2');
-        exit();
-    }
-    elseif ($checkPassUser === true) {
-        session_start();
-        $_SESSION['userid']= $InGameExists["userId"];
-        $_SESSION['userIGN']= $InGameExists["userInGameName"];
-        header('location: ../userprofile.php');
-        exit();
-    }
-}
-

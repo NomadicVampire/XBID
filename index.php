@@ -12,6 +12,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
   <title>XBID</title>
 </head>
 <body>
@@ -33,7 +35,6 @@ body {
 
 .sign {
   position: absolute;
-  font-family: 'Zen Dots', cursive;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -82,6 +83,11 @@ body {
 
 .flicker {
   animation: shine 2s forwards, blink 3s 2s infinite;
+}
+
+.flicker h2{
+  margin-top: 30px;
+    margin-left: -221px;
 }
 
 .fast-flicker {
@@ -228,8 +234,10 @@ body {
 }
 
 </style>
-<div class="sign">
-      <span class="fast-flicker">X</span><span class="flicker">BID</span><span class="flicker"><br><h2>Redefined</h2></span>  
+<div class="sign" style = "font-family: 'RocknRoll One', sans-serif;">
+      <span class="fast-flicker">X</span><span class="flicker">BID</span>
+      
+      <span class="flicker"><br><h2>Redefined</h2></span>  
 </div>
 </body>
 </html>

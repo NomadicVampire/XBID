@@ -44,16 +44,16 @@
 </head>
 <body>
 <div class="login-form">
-    <form action="includes/userlogin.inc.php" method="post">
+    <form action="" method="post">
         <h2 class="text-center">Welcome Back! User</h2>       
         <div class="form-group">
-            <input type="text" name = "IGNorEmail" class="form-control" placeholder="Username" required="required">
+            <input type="text" class="form-control" placeholder="Username" required="required">
         </div>
         <div class="form-group">
-            <input type="password" name = "user-pwd" class="form-control" placeholder="Password" required="required">
+            <input type="password" class="form-control" placeholder="Password" required="required">
         </div>
         <div class="form-group">
-            <button type="submit" name = "submit-login" class="btn btn-primary btn-block">Log in</button>
+            <button type="submit" class="btn btn-primary btn-block">Log in</button>
         </div>
         <div class="clearfix">
             <label class="float-left form-check-label"><input type="checkbox"> Remember me</label>

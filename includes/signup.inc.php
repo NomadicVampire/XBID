@@ -18,47 +18,42 @@ if (isset($_POST['submit-signup'])) {
 
 
     if (emptyInputSignup($userName,$inGameName,$gender,$email,$contact,$experiance,$pass,$repass) !== false) {
-      header('location: ../usersignup.php?error=emptyinput');
+      header('location: ../userSignup.php?error=emptyinput');
       exit();
     }
 
     if (invalidUsername($userName) !== false) {
-        header('location: ../usersignup.php?error=invalidusername');
+        header('location: ../userSignup.php?error=invalidusername');
         exit();
       }
     if (invalidEmail($email) !== false) {
-        header('location: ../usersignup.php?error=invalidEmail');
+        header('location: ../userSignup.php?error=invalidEmail');
         exit();
     }
     if (invalidUserContact($contact) !== false) {
-        header("location: ../usersignup.php?error=invalidContact");
+        header("location: ../userSignup.php?error=invalidContact");
         exit();
     }
     if (passwordCheck($pass,$repass) !== false) {
-        header('location: ../usersignup.php?error=passwordmatchInvalid');
+        header('location: ../userSignup.php?error=passwordmatchInvalid');
         exit();
       }
     if (IGNExists($conn, $inGameName, $email) !== false) {
-        header('location: ../usersignup.php?error=IGNExist');
+        header('location: ../userSignup.php?error=IGNExist');
         exit();
     }
 
-
-    if ($experiance==='Silver') {
+    if ($experiance=='Silver') {
         $basePrice=5;
-
-    }
-    if ($experiance==='Gold') {
+    }elseif ($experiance=='Gold') {
         $basePrice=10;
-        
     }else{
         $basePrice=20;
-        
     }
 
     createUser($conn,$userName,$inGameName,$gender,$email,$contact,$experiance,$pass,$basePrice);
 }
 else {
-    header('location: ../usersignup.php');
+    header('location: ../userSignup.php');
     exit();
 }

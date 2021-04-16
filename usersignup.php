@@ -133,7 +133,7 @@ body {
 		<div class="form-group">
             <button type="submit" name='submit-signup' class="btn btn-primary btn-block btn-lg">Sign Up</button>
         </div>
-		<p class="small text-center">By clicking the Sign Up button, you agree to our <br><a href="#">Terms &amp; Conditions</a>, and <a href="#">Privacy Policy</a>.</p>
+		<p class="small text-center">By clicking the Sign Up button, you agree to our <br><a href="t&c.php">Terms &amp; Conditions</a>, and <a href="t&c.php">Privacy Policy</a>.</p>
     </form>
 	<div class="text-center">Already have an account? <a href="../XBID/userlogin.php">Login here</a></div>
 </div>

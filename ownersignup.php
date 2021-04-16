@@ -112,45 +112,9 @@ body {
 		<div class="form-group">
             <button type="submit" name = "submit" class="btn btn-primary btn-block btn-lg">Sign Up</button>
         </div>
-		<p class="small text-center">By clicking the Sign Up button, you agree to our <br><a href="#">Terms &amp; Conditions</a>, and <a href="#">Privacy Policy</a>.</p>
+		<p class="small text-center">By clicking the Sign Up button, you agree to our <br><a href="t&c.php">Terms &amp; Conditions</a>, and <a href="t&c.php">Privacy Policy</a>.</p>
     </form>
 	<div class="text-center">Already have an account? <a href="../XBID/ownerlogin.php">Login here</a></div>
 </div>
-
-<?php
-
-if (isset($_GET['error'])) {
-	if ($_GET['error']== 'emptyinput') {
-	 echo "<p> Required All fields to be Filled </p>";
-	}
-	elseif ($_GET['error']== 'invalidusername') {
-	echo "<p> invalid user nametry again </p>";
-	}
-	elseif ($_GET['error']== 'invalidContact') {
-		echo "<p> invalid contact number try again </p>";
-		}
-	elseif ($_GET['error']== 'invalidemail') {
-	echo "<p> Inout valid email id </p>";
-	}
-	elseif ($_GET['error']== 'passwordmatchInvalid') {
-	echo "<p> passwords did'nt match </p>";
-	}
-	elseif ($_GET['error']== 'stmtFailed1') {
-	echo "<p> STMT-1 failed </p>";
-	}
-	elseif ($_GET['error']== 'stmtFailed2') {
-		echo "<p> STMT-2 failed </p>";
-		}
-	elseif ($_GET['error']== 'teamnametaken') {
-	echo "<p> TeamName already taken try diff one </p>";
-	}
-	elseif ($_GET['error']== 'None') {
-	 echo "<p> You signed up successfully </p>";
-	}
-}
-
-?>
-
-
 </body>
 </html>
