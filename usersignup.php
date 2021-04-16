@@ -93,7 +93,7 @@ body {
 </head>
 <body>
 <div class="signup-form">
-    <form action="includes/signup.inc.php" method="post">
+    <form action="includes/usersignup.inc.php" method="post">
 		<h2>User Sign Up</h2>
 		<p>It's free and only takes a minute.</p>
 		<hr>
@@ -104,7 +104,8 @@ body {
         	<input type="text" class="form-control" name="ign" placeholder="In Game Name (IGN)" required="required">
         </div>
         <div class="form-group">
-		<select name="gender" id="gender">
+		<label for="gender">Gender :</label>
+		<select name="gender" id="gender" style="width: 84%;">
             <option value="Male">Male</option>
             <option value="Female">Female</option>
             <option value="Others">Others</option>
@@ -118,7 +119,8 @@ body {
         	<input type="text" class="form-control" name="contact" placeholder="Contact Details" required="required">
         </div>
         <div class="form-group">
-		<select name="experience" id="experience">
+		<label for="experience">Experience Level:</label>
+		<select name="experience" id="experience" style="width: 69%;">
         <option value="silver">Silver</option>
         <option value="gold">Gold</option>
         <option value="diamond">Diamond</option>

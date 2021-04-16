@@ -17,9 +17,17 @@ if(isset($_POST['submit'])){
     header("location: ../ownersignup.php?error=emptyinput");
     exit();
     }
-    if(invalidOwnerUid($name) !== false){
-    header("location: ../ownersignup.php?error=invaliduid");
+    if(invalidOwnerName($name) !== false){
+    header("location: ../ownersignup.php?error=invalidName");
     exit();
+    }
+    if(invalidOwnerTeamname($teamname) !== false){
+    header("location: ../ownersignup.php?error=invalidTeamname");
+    exit();
+    }
+    if (invalidOwnerContact($contact) !== false) {
+        header("location: ../ownersignup.php?error=invalidOwnerContact");
+        exit();
     }
     if(invalidOwnerEmail($email) !== false){
     header("location: ../ownersignup.php?error=invalidemail");
@@ -31,7 +39,7 @@ if(isset($_POST['submit'])){
     }
     // conn variable is used bcauz we find username is taken or not from database, so it requires connection
     if(OwneruidExists($conn, $teamname, $email) !== false){
-    header("location: ../ownersignup.php?error=usernametaken");
+    header("location: ../ownersignup.php?error=Teamnametaken");
     exit();
     }
 

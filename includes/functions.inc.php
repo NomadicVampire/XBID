@@ -1,12 +1,12 @@
 <?php
 
 
-//   -------------------------------------------------------------------------------------------------------------------------------------
-//                                                               USER SIGNUP
-//   -------------------------------------------------------------------------------------------------------------------------------------
+//   ----------------------------------------------------------------------------------------------------------
+//                                                USER SIGNUP
+//--------------------------------------------------------------------------------------------------------
 
 
-function emptyInputSignup($userName,$inGameName,$gender,$email,$contact,$experiance,$pass,$repass){
+function emptyInputUserSignup($userName,$inGameName,$gender,$email,$contact,$experiance,$pass,$repass){
 
     $result;
     if (empty($userName) || empty($inGameName) || empty($gender)|| empty($email)|| empty($contact)||empty($pass)|| empty($repass)) {
@@ -19,10 +19,10 @@ function emptyInputSignup($userName,$inGameName,$gender,$email,$contact,$experia
 
 }
 
-function invalidUsername($userName){
+function invalidName($userName){
     $result;
     
-    if (!preg_match("/^[a-zA-Z0-9]*$/", $userName)) {
+    if (!preg_match("/^[a-zA-Z0-9 ]*$/", $userName)) {
       $result=true;
         
     }
@@ -32,7 +32,18 @@ function invalidUsername($userName){
     return $result;
 }
 
-function invalidEmail($email){
+function invalidUsername($inGameName) {
+    $result;
+    if(!preg_match("/^[a-zA-Z0-9]*$/", $inGameName)){
+        $result = true;
+    }
+    else{
+        $result = false;
+    }
+    return $result;
+}
+
+function invalidUserEmail($email){
     $result;
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $result= true;
@@ -46,7 +57,7 @@ function invalidEmail($email){
 function invalidUserContact($contact){
 
     $result;
-    if (preg_match('/^\d{10}$/', $contact)) {
+    if (preg_match('/^[1-9][0-9]{10}$/', $contact)) {
         $contact = '0' . $contact;
         return $result = true;
     }
@@ -72,7 +83,7 @@ function IGNExists($conn, $inGameName, $email){
     $sql = "SELECT * FROM user_details  WHERE userInGameName = ? OR userEmail = ?;"; 
     $stmt = mysqli_stmt_init($conn); //Initializes a statement and returns an object for use with mysqli_stmt_prepare
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header('location: ../userSignup.php?error=stmtFailed1');
+        header('location: ../usersignup.php?error=stmtFailed1');
         exit();
     } //Prepares an SQL statement for execution
     
@@ -97,7 +108,7 @@ function createUser($conn,$userName,$inGameName,$gender,$email,$contact,$experia
     $sql = "INSERT INTO user_details (userName, userInGameName, userGender, userEmail,userContact,userExperience,userPassword,userBasePrice) VALUES (?, ?, ?, ?, ?, ?, ?, ?);"; 
     $stmt = mysqli_stmt_init($conn); //Initializes a statement and returns an object for use with mysqli_stmt_prepare
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header('location: ../UserSignup.php?error=stmtFailed2');
+        header('location: ../usersignup.php?error=stmtFailed2');
         exit();
     } //Prepares an SQL statement for execution
     
@@ -106,7 +117,7 @@ function createUser($conn,$userName,$inGameName,$gender,$email,$contact,$experia
     mysqli_stmt_bind_param($stmt,"ssssssss", $userName,$inGameName,$gender,$email,$contact,$experiance, $hashedPwd,$basePrice); // Binds variables to a prepared statement as parameters
     mysqli_stmt_execute($stmt); //Executes a prepared statement
     mysqli_stmt_close($stmt);
-    header('location: ../userSignup.php?error=None');
+    header('location: ../usersignup.php?error=None');
     exit();
     
 
@@ -115,9 +126,9 @@ function createUser($conn,$userName,$inGameName,$gender,$email,$contact,$experia
 
 
 
-//   -------------------------------------------------------------------------------------------------------------------------------------
-//                                                               OWNER SIGNUP
-//   -------------------------------------------------------------------------------------------------------------------------------------
+//   ----------------------------------------------------------------------------------------------------------
+//                                                         OWNER SIGNUP
+//--------------------------------------------------------------------------------------------------------
 
 function emptyInputOwnerSignup($name,$teamname,$email,$contact,$password,$confirm_password){
     $result;
@@ -129,9 +140,9 @@ function emptyInputOwnerSignup($name,$teamname,$email,$contact,$password,$confir
     }
     return $result;
 }
-function invalidOwnerUid($name) {
+function invalidOwnerName($name) {
     $result;
-    if(!preg_match("/^[a-zA-Z0-9]*$/", $name)){
+    if(!preg_match("/^[a-zA-Z ]*$/", $name)){
         $result = true;
     }
     else{
@@ -139,6 +150,29 @@ function invalidOwnerUid($name) {
     }
     return $result;
 }
+function invalidOwnerTeamname($teamname) {
+    $result;
+    if(!preg_match("/^[a-zA-Z0-9]*$/", $teamname)){
+        $result = true;
+    }
+    else{
+        $result = false;
+    }
+    return $result;
+}
+function invalidOwnerContact($contact){
+
+    $result;
+    if (preg_match('/^[1-9][0-9]{10}$/', $contact)) {
+        $contact = '0' . $contact;
+        return $result = true;
+    }
+    else {
+        $result = false;
+    }
+    return $result;
+}
+
 function invalidOwnerEmail($email){
     $result;
     if(!filter_var($email, FILTER_VALIDATE_EMAIL)){

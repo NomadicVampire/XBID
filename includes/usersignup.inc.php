@@ -17,29 +17,32 @@ if (isset($_POST['submit-signup'])) {
     require_once 'functions.inc.php';
 
 
-    if (emptyInputSignup($userName,$inGameName,$gender,$email,$contact,$experiance,$pass,$repass) !== false) {
-      header('location: ../userSignup.php?error=emptyinput');
+    if (emptyInputUserSignup($userName,$inGameName,$gender,$email,$contact,$experiance,$pass,$repass) !== false) {
+      header('location: ../usersignup.php?error=emptyinput');
       exit();
     }
-
-    if (invalidUsername($userName) !== false) {
-        header('location: ../userSignup.php?error=invalidusername');
+    if (invalidName($userName) !== false) {
+        header('location: ../usersignup.php?error=invalidName');
         exit();
       }
-    if (invalidEmail($email) !== false) {
-        header('location: ../userSignup.php?error=invalidEmail');
+    if (invalidUsername($inGameName) !== false) {
+        header('location: ../usersignup.php?error=invalidUsername');
+        exit();
+      }
+    if (invalidUserEmail($email) !== false) {
+        header('location: ../usersignup.php?error=invalidEmail');
         exit();
     }
     if (invalidUserContact($contact) !== false) {
-        header("location: ../userSignup.php?error=invalidContact");
+        header("location: ../usersignup.php?error=invalidContact");
         exit();
     }
     if (passwordCheck($pass,$repass) !== false) {
-        header('location: ../userSignup.php?error=passwordmatchInvalid');
+        header('location: ../usersignup.php?error=passwordmatchInvalid');
         exit();
       }
     if (IGNExists($conn, $inGameName, $email) !== false) {
-        header('location: ../userSignup.php?error=IGNExist');
+        header('location: ../usersignup.php?error=IGNexist');
         exit();
     }
 
@@ -54,6 +57,6 @@ if (isset($_POST['submit-signup'])) {
     createUser($conn,$userName,$inGameName,$gender,$email,$contact,$experiance,$pass,$basePrice);
 }
 else {
-    header('location: ../userSignup.php');
+    header('location: ../usersignup.php');
     exit();
 }
