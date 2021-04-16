@@ -129,9 +129,9 @@ function emptyInputOwnerSignup($name,$teamname,$email,$contact,$password,$confir
     }
     return $result;
 }
-function invalidOwnerUid($teamname) {
+function invalidOwnerUid($name) {
     $result;
-    if(!preg_match("/^[a-zA-Z0-9]*$/", $teamname)){
+    if(!preg_match("/^[a-zA-Z0-9]*$/", $name)){
         $result = true;
     }
     else{
@@ -149,9 +149,20 @@ function invalidOwnerEmail($email){
     }
     return $result;
 }
+function invalidOwnerContact($cont){
+    $result;
+    if (preg_match('/^\d{10}$/', $cont)) {
+        $cont = '0' . $cont;
+        return $result = true;
+    }
+    else {
+        $result = false;
+    }
+    return $result;
+}
 function OwnerpwdMatch($password, $confirm_password){
     $result;
-    if($pwd !== $pwdRepeat){
+    if($password !== $confirm_password){
         $result = true;
     }
     else{
@@ -161,11 +172,11 @@ function OwnerpwdMatch($password, $confirm_password){
 }
 function OwneruidExists($conn, $teamname, $email){
 
-    $sql = "SELECT * FROM owner_details WHERE onwerTeamName = ? OR ownerEmail = ?;";
+    $sql = "SELECT * FROM owner_details WHERE ownerTeamName = ? OR ownerEmail = ?;";
     $stmt = mysqli_stmt_init($conn);    // Prepared Statement
     
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        header("location: ../onwersignup.php?error=stmtfailed");
+        header("location: ../ownersignup.php?error=stmtFailed1");
         exit();
     }
     // now if this not fails then we pass data through argument to chechk whether username exists or not.
@@ -198,7 +209,7 @@ function createOwner($conn,$name,$teamname,$email,$contact,$password){
     $stmt = mysqli_stmt_init($conn);    // Prepared Statement
 
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        header("location: ../ownersignup.php?error=stmtfailed");
+        header("location: ../ownersignup.php?error=stmtFailed2");
     }
 
     // Hashed password for secuirity purpose
