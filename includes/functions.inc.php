@@ -227,3 +227,44 @@ function createOwner($conn,$name,$teamname,$email,$contact,$password){
     exit();
 
 }
+
+//   -------------------------------------------------------------------------------------------------------------------------------------
+//                                                              LOGIN USER
+//   -------------------------------------------------------------------------------------------------------------------------------------
+
+
+function emptyUserLogin($userIGN, $userPwd){
+    $result;
+    if (empty($userIGN)||empty($userPwd)) {
+        $result= true;
+    }
+    else {
+        $result = false;
+    }
+    return $result;
+}
+
+function loginUser($conn, $userIGN, $userPwd){
+    $InGameExists = IGNExists($conn, $userIGN, $userEmail);
+
+    if ($InGameExists=== false) {
+        header('location: ../userlogin.php?error=wronglogin1');
+        exit();
+    }
+
+    $passHashedUser = $InGameExists["userPassword"];
+    $checkPassUser = password_verify($userPwd, $passHashedUser);
+
+    if ($checkPassUser === false) {
+        header('location: ../userlogin.php?error=wronglogin2');
+        exit();
+    }
+    elseif ($checkPassUser === true) {
+        session_start();
+        $_SESSION['userid']= $InGameExists["userId"];
+        $_SESSION['userIGN']= $InGameExists["userInGameName"];
+        header('location: ../userprofile.php');
+        exit();
+    }
+}
+

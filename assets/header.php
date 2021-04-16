@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -54,6 +58,7 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Contact Us</a>
         </li>
+
       </ul>
     </div>
   </div>
