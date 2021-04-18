@@ -74,8 +74,10 @@
           Login
         </a>
         <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
+          <li><a class='dropdown-item' href='../XBID/adminlogin.php'> Admin (private)</a></li>
           <li><a class='dropdown-item' href='../XBID/userlogin.php'> User</a></li>
           <li><a class='dropdown-item' href='../XBID/ownerlogin.php'> Owner</a></li>
+
         </ul>
       </li>";
 

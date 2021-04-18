@@ -156,9 +156,15 @@ function loginUser($conn,$username,$pwd){
         session_start(); //new session started
         $_SESSION["userid"] = $IGNExists["userId"];
         $_SESSION["userign"] = $IGNExists["userInGameName"];
+        $_SESSION["userCon"] = $IGNExists["userContact"];
+        $_SESSION["userBp"] = $IGNExists["userBasePrice"];
+        $_SESSION["userExp"] = $IGNExists["userExperience"];
+        $_SESSION["userGen"] = $IGNExists["userGender"];
+        $_SESSION["userEm"] = $IGNExists["userEmail"];
+        
         // here userid and useruid are global session variables
 
-        header("location: ../index.php");
+        header("location: ../uPro.php");
         exit();
 
     }
@@ -324,3 +330,66 @@ function loginOwner($conn,$ownername,$ownerpwd){
 
     }
 }
+
+//   ----------------------------------------------------------------------------------------------------------
+//                                                         ADMIN LOGIN
+//--------------------------------------------------------------------------------------------------------
+
+
+function adminExists($conn,$adminEmail){
+
+    $sql = "SELECT * FROM admin_details  WHERE adminEmail = ?;"; 
+    $stmt = mysqli_stmt_init($conn); //Initializes a statement and returns an object for use with mysqli_stmt_prepare
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header('location: ../adminlogin.php?error=stmtFailed1');
+        exit();
+    } //Prepares an SQL statement for execution
+    
+    mysqli_stmt_bind_param($stmt, "s", $adminEmail); // Binds variables to a prepared statement as parameters
+    mysqli_stmt_execute($stmt); //Executes a prepared statement
+
+    $resultData = mysqli_stmt_get_result($stmt); //Gets a result set from a prepared statement
+
+    if ($row = mysqli_fetch_assoc($resultData)) {
+        return $row;
+    } //Fetch a result row as an associative array
+    else {
+        $result = false;
+        return $result;
+    }
+
+    mysqli_stmt_close($stmt);
+
+
+}
+
+function loginAdmin($conn,$adminEmail,$adminPwd){
+
+    $adminExists = adminExists($conn,$adminEmail); 
+
+    // If entered teamname or mail is not in database
+    if($adminExists === false){
+        header("location: ../adminlogin.php?error=InvalidEmail");
+        exit();
+    }
+
+     $PwdNotHashed = $adminExists["adminPassword"];
+
+    
+
+    if($PwdNotHashed !== $adminPwd){
+        header("location: ../adminlogin.php?error=wrongadminpwd");
+        exit();
+    }
+    else if ($PwdNotHashed == $adminPwd){
+        session_start(); //new session started
+        $_SESSION["adminid"] = $adminExists["adminId"];
+        $_SESSION["adminemail"] = $adminExists["adminEmail"];
+
+        header("location: ../adminprofile.php");
+        exit();
+
+    }
+ }
+
+ // END --ADMIN ----
