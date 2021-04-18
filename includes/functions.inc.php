@@ -164,7 +164,7 @@ function loginUser($conn,$username,$pwd){
         
         // here userid and useruid are global session variables
 
-        header("location: ../uPro.php");
+        header("location: ../index.php");
         exit();
 
     }
@@ -323,7 +323,11 @@ function loginOwner($conn,$ownername,$ownerpwd){
     else if ($CheckPwd === true){
         session_start(); //new session started
         $_SESSION["ownerid"] = $OwneruidExists["ownerId"];
+        $_SESSION["ownername"] = $OwneruidExists["ownerName"];
         $_SESSION["ownertn"] = $OwneruidExists["ownerTeamName"];
+        $_SESSION["ownerEm"] = $OwneruidExists["ownerEmail"];
+        $_SESSION["ownerCn"] = $OwneruidExists["ownerContact"];
+        $_SESSION["ownerBA"] = $OwneruidExists["ownerBidAmt"];
 
         header("location: ../index.php");
         exit();

@@ -61,6 +61,9 @@
         <a class="nav-link active" aria-current="page" href="ownerprofile.php">Profile</a>
       </li>';
         echo '<li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="userprofilelist.php">Players</a>
+      </li>';
+        echo '<li class="nav-item">
         <a class="nav-link active" aria-current="page" href="auction.php">Join Auction</a>
       </li>';
         echo '<li class="nav-item">
