@@ -9,7 +9,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Owner Login </title>
+<title>Owner Login | XBID </title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -43,23 +43,37 @@
 </head>
 <body>
 <div class="login-form">
-    <form action="/includes/onwersignup.inc.php" method="post">
+    <form action="includes/ownerlogin.inc.php" method="post">
         <h2 class="text-center">Welcome Back! Owner </h2>       
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Username" required="required">
+            <input type="text" name="ownerteamname" class="form-control" placeholder="Team Name" required="required">
         </div>
         <div class="form-group">
-            <input type="password" class="form-control" placeholder="Password" required="required">
+            <input type="password" name = "ownerpwd" class="form-control" placeholder="Password" required="required">
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block">Log in</button>
+            <button type="submit" name = "ownersubmit" class="btn btn-primary btn-block">Log in</button>
         </div>
+
+        <?php
+
+        if (isset($_GET['error'])) {
+            if ($_GET['error']== 'InvalidTeamname') {
+            echo "<p style = 'color:red;'>Invalid Team Name</p>";
+            }
+            elseif ($_GET['error']== 'OwnerWrongPassword') {
+            echo "<p style = 'color:red;'>Wrong password. Try again </p>";
+            }
+}
+        ?>
+
+
         <div class="clearfix">
             <label class="float-left form-check-label"><input type="checkbox"> Remember me</label>
             <a href="#" class="float-right">Forgot Password?</a>
         </div>        
     </form>
-    <p class="text-center"><a href="../XBID/ownersignup.php">Create an Account</a></p>
+    <p class="text-center"><a href="../XBID/ownersignup.php">Create an Account. Sign Up Here !</a></p>
 </div>
 </body>
 </html>

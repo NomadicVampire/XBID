@@ -1,3 +1,8 @@
+<?php
+  session_start();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -33,27 +38,62 @@
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
       <ul class="navbar-nav">
-      <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Login
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="../XBID/userlogin.php"> User</a></li>
-            <li><a class="dropdown-item" href="../XBID/ownerlogin.php"> Owner</a></li>
-          </ul>
+      <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Services</a>
         </li>
-      <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Sign Up
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="../XBID/usersignup.php"> User</a></li>
-            <li><a class="dropdown-item" href="../XBID/ownersignup.php"> Owner</a></li>
-          </ul>
+      <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Contact</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Contact Us</a>
-        </li>
+      <?php
+
+      if(isset($_SESSION["userid"])){
+        // if User is logged in
+        echo '<li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="userprofile.php">Profile</a>
+      </li>';
+        echo '<li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="includes/userlogout.inc.php">Log Out</a>
+      </li>';
+      }
+      else if(isset($_SESSION["ownerid"])){
+        // if Owner is logged in
+        echo '<li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="ownerprofile.php">Profile</a>
+      </li>';
+        echo '<li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="auction.php">Join Auction</a>
+      </li>';
+        echo '<li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="includes/ownerlogout.inc.php">Logout</a>
+      </li>';
+      }
+      else{
+        //  Login Dropdown 
+        echo "<li class='nav-item dropdown'>
+        <a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
+          Login
+        </a>
+        <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
+          <li><a class='dropdown-item' href='../XBID/userlogin.php'> User</a></li>
+          <li><a class='dropdown-item' href='../XBID/ownerlogin.php'> Owner</a></li>
+        </ul>
+      </li>";
+
+        //  SignUp Dropdown
+        echo '<li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Sign Up
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="../XBID/usersignup.php"> User</a></li>
+          <li><a class="dropdown-item" href="../XBID/ownersignup.php"> Owner</a></li>
+        </ul>
+      </li>';
+      }
+      
+
+        ?>
+        
       </ul>
     </div>
   </div>

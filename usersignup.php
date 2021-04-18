@@ -16,7 +16,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
-<title>Bootstrap Quick Sign up Form</title>
+<title>User Sign up Form | XBID</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -96,6 +96,43 @@ body {
     <form action="includes/usersignup.inc.php" method="post">
 		<h2>User Sign Up</h2>
 		<p>It's free and only takes a minute.</p>
+
+		<?php
+
+if (isset($_GET['error'])) {
+	if ($_GET['error']== 'emptyinput') {
+	 echo "<p style = 'color:red;'>All fields to be filled </p>";
+	}
+	elseif ($_GET['error']== 'invaliduserName') {
+	echo "<p style = 'color:red;'>Invalid Name. Try again </p>";
+	}
+	elseif ($_GET['error']== 'invalidIGN') {
+	echo "<p style = 'color:red;'>Invalid In-Game Name. Try again </p>";
+	}
+	elseif ($_GET['error']== 'invalidContact') {
+		echo "<p style = 'color:red;'>Contact no. should be of 10 digits.</p>";
+		}
+	elseif ($_GET['error']== 'invalidEmail') {
+	echo "<p style = 'color:red;'> Invalid email id</p>";
+	}
+	elseif ($_GET['error']== 'passwordmatchInvalid') {
+	echo "<p style = 'color:red;'> Passwords didn't match </p>";
+	}
+	elseif ($_GET['error']== 'stmtFailed1') {
+	echo "<p style = 'color:red;'> STMT-1 failed </p>";
+	}
+	elseif ($_GET['error']== 'stmtFailed2') {
+		echo "<p style = 'color:red;'> STMT-2 failed </p>";
+		}
+	elseif ($_GET['error']== 'IGNexist') {
+	echo "<p style = 'color:red;'> In Game Name already taken. Try different one</p>";
+	}
+	elseif ($_GET['error']== 'None') {
+	 echo "<p style = 'color:green;' > You signed up successfully </p>";
+	}
+}
+
+?>
 		<hr>
         <div class="form-group">
         	<input type="text" class="form-control" name="name" placeholder="Name" required="required">
@@ -135,44 +172,13 @@ body {
 		<div class="form-group">
             <button type="submit" name='submit-signup' class="btn btn-primary btn-block btn-lg">Sign Up</button>
         </div>
+
+		
+
 		<p class="small text-center">By clicking the Sign Up button, you agree to our <br><a href="t&c.php">Terms &amp; Conditions</a>, and <a href="t&c.php">Privacy Policy</a>.</p>
     </form>
 	<div class="text-center">Already have an account? <a href="../XBID/userlogin.php">Login here</a></div>
 </div>
-<?php
-
-if (isset($_GET['error'])) {
-	if ($_GET['error']== 'emptyinput') {
-	 echo "<p> Required All fields to be Filled </p>";
-	}
-	elseif ($_GET['error']== 'invalidusername') {
-	echo "<p> invalid user nametry again </p>";
-	}
-	elseif ($_GET['error']== 'invalidContact') {
-		echo "<p> invalid contact number try again </p>";
-		}
-	elseif ($_GET['error']== 'invalidemail') {
-	echo "<p> Inout valid email id </p>";
-	}
-	elseif ($_GET['error']== 'passwordmatchInvalid') {
-	echo "<p> passwords did'nt match </p>";
-	}
-	elseif ($_GET['error']== 'stmtFailed1') {
-	echo "<p> STMT-1 failed </p>";
-	}
-	elseif ($_GET['error']== 'stmtFailed2') {
-		echo "<p> STMT-2 failed </p>";
-		}
-	elseif ($_GET['error']== 'IGNExist') {
-	echo "<p> userName already taken try diff one </p>";
-	}
-	elseif ($_GET['error']== 'None') {
-	 echo "<p> You signed up successfully </p>";
-	}
-}
-
-?>
-
 
 
 

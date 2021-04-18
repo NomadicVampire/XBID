@@ -127,6 +127,48 @@ function createUser($conn,$userName,$inGameName,$gender,$email,$contact,$experia
 
 
 //   ----------------------------------------------------------------------------------------------------------
+//                                                          USER LOGIN
+//--------------------------------------------------------------------------------------------------------
+
+
+function loginUser($conn,$username,$pwd){
+    $IGNExists = IGNExists($conn, $username, $username);
+    // BOth the arguments are as username as it automatically fits in sql query 
+
+
+    // If entered username or mail is not in database
+    if($IGNExists === false){
+        header("location: ../userlogin.php?error=InvalidUsername");
+        exit();
+    }
+
+    // As $uidExists stores assoc which is array of data in rows. so to check the passowrd column either we can write its index or we can write column name
+    $pwdHashed = $IGNExists["userPassword"];
+
+    $checkPwd = password_verify($pwd, $pwdHashed);
+    // password_verify function checks that two agruments which are password, are same or not.... if same then return true else false.
+
+    if($checkPwd === false){
+        header("location: ../userlogin.php?error=WrongPassword");
+        exit();
+    }
+    else if ($checkPwd === true){
+        session_start(); //new session started
+        $_SESSION["userid"] = $IGNExists["userId"];
+        $_SESSION["userign"] = $IGNExists["userInGameName"];
+        // here userid and useruid are global session variables
+
+        header("location: ../index.php");
+        exit();
+
+    }
+}
+
+
+
+
+
+//   ----------------------------------------------------------------------------------------------------------
 //                                                         OWNER SIGNUP
 //--------------------------------------------------------------------------------------------------------
 
@@ -199,7 +241,7 @@ function OwneruidExists($conn, $teamname, $email){
     $stmt = mysqli_stmt_init($conn);    // Prepared Statement
     
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        header("location: ../onwersignup.php?error=stmtfailed");
+        header("location: ../onwersignup.php?error=stmtfailed1");
         exit();
     }
     // now if this not fails then we pass data through argument to chechk whether username exists or not.
@@ -232,7 +274,7 @@ function createOwner($conn,$name,$teamname,$email,$contact,$password){
     $stmt = mysqli_stmt_init($conn);    // Prepared Statement
 
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        header("location: ../ownersignup.php?error=stmtfailed");
+        header("location: ../ownersignup.php?error=stmtfailed2");
     }
 
     // Hashed password for secuirity purpose
@@ -249,4 +291,36 @@ function createOwner($conn,$name,$teamname,$email,$contact,$password){
     header("location: ../ownersignup.php?error=none");
     exit();
 
+}
+
+//   ----------------------------------------------------------------------------------------------------------
+//                                                          OWNER LOGIN
+//--------------------------------------------------------------------------------------------------------
+
+function loginOwner($conn,$ownername,$ownerpwd){
+    $OwneruidExists = OwneruidExists($conn, $ownername, $ownername); 
+
+    // If entered teamname or mail is not in database
+    if($OwneruidExists === false){
+        header("location: ../ownerlogin.php?error=InvalidTeamname");
+        exit();
+    }
+
+    $PwdHashed = $OwneruidExists["ownerPassword"];
+
+    $CheckPwd = password_verify($ownerpwd, $PwdHashed);
+
+    if($CheckPwd === false){
+        header("location: ../ownerlogin.php?error=OwnerWrongPassword");
+        exit();
+    }
+    else if ($CheckPwd === true){
+        session_start(); //new session started
+        $_SESSION["ownerid"] = $OwneruidExists["ownerId"];
+        $_SESSION["ownertn"] = $OwneruidExists["ownerTeamName"];
+
+        header("location: ../index.php");
+        exit();
+
+    }
 }

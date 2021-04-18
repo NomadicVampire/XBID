@@ -22,11 +22,11 @@ if (isset($_POST['submit-signup'])) {
       exit();
     }
     if (invalidName($userName) !== false) {
-        header('location: ../usersignup.php?error=invalidName');
+        header('location: ../usersignup.php?error=invaliduserName');
         exit();
       }
     if (invalidUsername($inGameName) !== false) {
-        header('location: ../usersignup.php?error=invalidUsername');
+        header('location: ../usersignup.php?error=invalidIGN');
         exit();
       }
     if (invalidUserEmail($email) !== false) {

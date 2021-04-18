@@ -10,7 +10,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
-<title>Bootstrap Quick Sign up Form</title>
+<title>Owner Sign up Form | XBID</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -90,6 +90,45 @@ body {
     <form action="includes/ownersignup.inc.php" method="post">
 		<h2>Owner Sign Up</h2>
 		<p>It's free and only takes a minute.</p>
+
+<!-- ERROR messages -->
+<?php
+
+if (isset($_GET['error'])) {
+	if ($_GET['error']== 'emptyinput') {
+	 echo "<p style = 'color:red;'>All fields to be filled </p>";
+	}
+	elseif ($_GET['error']== 'invalidName') {
+	echo "<p style = 'color:red;'>Invalid Name. Try again </p>";
+	}
+	elseif ($_GET['error']== 'invalidTeamname') {
+	echo "<p style = 'color:red;'>Invalid Teamname. Try another one. </p>";
+	}
+	elseif ($_GET['error']== 'invalidOwnerContact') {
+		echo "<p style = 'color:red;'>Contact no. should be of 10 digits.</p>";
+		}
+	elseif ($_GET['error']== 'invalidemail') {
+	echo "<p style = 'color:red;'> Invalid email id</p>";
+	}
+	elseif ($_GET['error']== 'passwordsdontmatch') {
+	echo "<p style = 'color:red;'> Passwords didn't match </p>";
+	}
+	elseif ($_GET['error']== 'stmtfailed1') {
+	echo "<p style = 'color:red;'> STMT-1 failed </p>";
+	}
+	elseif ($_GET['error']== 'stmtfailed2') {
+		echo "<p style = 'color:red;'> STMT-2 failed </p>";
+		}
+	elseif ($_GET['error']== 'Teamnametaken') {
+	echo "<p style = 'color:red;'> Teamname already taken. Try different one</p>";
+	}
+	elseif ($_GET['error']== 'none') {
+	 echo "<p style = 'color:green;' > You signed up successfully </p>";
+	}
+}
+
+?>
+
 		<hr>
         <div class="form-group">
         	<input type="text" class="form-control" name="name" placeholder="Name" required="required">
