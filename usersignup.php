@@ -158,9 +158,9 @@ if (isset($_GET['error'])) {
         <div class="form-group">
 		<label for="experience">Experience Level:</label>
 		<select name="experience" id="experience" style="width: 69%;">
-        <option value="silver">Silver</option>
-        <option value="gold">Gold</option>
-        <option value="diamond">Diamond</option>
+        <option value="Silver">Silver</option>
+        <option value="Gold">Gold</option>
+        <option value="Diamond">Diamond</option>
     </select>
         </div>
 		<div class="form-group">
