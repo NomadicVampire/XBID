@@ -397,3 +397,8 @@ function loginAdmin($conn,$adminEmail,$adminPwd){
  }
 
  // END --ADMIN ----
+
+
+ // userProfile 
+
+ 

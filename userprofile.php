@@ -91,6 +91,13 @@ background: linear-gradient(to right, #ec2F4B, #009FFF);
           <h4>Contact</h4>
           <p><?php echo $uContact ?></p>
         </div>
+        <!-- <div class="col-4">
+          <h4>Profile Image</h4>
+          <form action="includes/userUpImg.inc.php" method="post" enctype = "multipart/form-data">
+          <input type="file" name="file" >
+          <button type="submit" name="user-upload">Upload</button>
+          </form>
+        </div> -->
       </div>
     </div>
   </header>
