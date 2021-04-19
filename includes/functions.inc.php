@@ -9,7 +9,7 @@
 function emptyInputUserSignup($userName,$inGameName,$gender,$email,$contact,$experiance,$pass,$repass){
 
     $result;
-    if (empty($userName) || empty($inGameName) || empty($gender)|| empty($email)|| empty($contact)||empty($pass)|| empty($repass)) {
+    if (empty($userName) || empty($inGameName) || empty($gender)|| empty($email) || empty($contact)||empty($pass)|| empty($repass)) {
         $result= true;
     }
     else {
@@ -104,8 +104,8 @@ function IGNExists($conn, $inGameName, $email){
 
 }
 
-function createUser($conn,$userName,$inGameName,$gender,$email,$contact,$experiance,$pass,$basePrice){
-    $sql = "INSERT INTO user_details (userName, userInGameName, userGender, userEmail,userContact,userExperience,userPassword,userBasePrice) VALUES (?, ?, ?, ?, ?, ?, ?, ?);"; 
+function createUser($conn,$userName,$inGameName,$gender,$userprofile,$email,$contact,$experiance,$pass,$basePrice){
+    $sql = "INSERT INTO user_details (userName, userInGameName, userGender, userProfile,userEmail,userContact,userExperience,userPassword,userBasePrice) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);"; 
     $stmt = mysqli_stmt_init($conn); //Initializes a statement and returns an object for use with mysqli_stmt_prepare
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header('location: ../usersignup.php?error=stmtFailed2');
@@ -114,7 +114,7 @@ function createUser($conn,$userName,$inGameName,$gender,$email,$contact,$experia
     
     $hashedPwd = password_hash($pass, PASSWORD_DEFAULT);
 
-    mysqli_stmt_bind_param($stmt,"ssssssss", $userName,$inGameName,$gender,$email,$contact,$experiance, $hashedPwd,$basePrice); // Binds variables to a prepared statement as parameters
+    mysqli_stmt_bind_param($stmt,"sssssssss", $userName,$inGameName,$gender,$userprofile,$email,$contact,$experiance, $hashedPwd,$basePrice); // Binds variables to a prepared statement as parameters
     mysqli_stmt_execute($stmt); //Executes a prepared statement
     mysqli_stmt_close($stmt);
     header('location: ../usersignup.php?error=None');
@@ -156,6 +156,7 @@ function loginUser($conn,$username,$pwd){
         session_start(); //new session started
         $_SESSION["userid"] = $IGNExists["userId"];
         $_SESSION["userign"] = $IGNExists["userInGameName"];
+        $_SESSION["userprofile"] = $IGNExists["userProfile"];
         $_SESSION["userCon"] = $IGNExists["userContact"];
         $_SESSION["userBp"] = $IGNExists["userBasePrice"];
         $_SESSION["userExp"] = $IGNExists["userExperience"];
@@ -397,8 +398,3 @@ function loginAdmin($conn,$adminEmail,$adminPwd){
  }
 
  // END --ADMIN ----
-
-
- // userProfile 
-
- 

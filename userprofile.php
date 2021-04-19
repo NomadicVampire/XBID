@@ -64,8 +64,7 @@ background: linear-gradient(to right, #ec2F4B, #009FFF);
 <section class="profile">
   <header class="header">
     <div class="details">
-      <img src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ&s=b38c22a46932485790a3f52c61fcbe5a" alt="John Doe" class="profile-pic">
-      <?php
+    <?php
       $uID = $_SESSION["userid"];
       $uIGN = $_SESSION["userign"];
       $uContact = $_SESSION["userCon"];
@@ -73,8 +72,9 @@ background: linear-gradient(to right, #ec2F4B, #009FFF);
       $uGener = $_SESSION["userGen"];
       $uExp = $_SESSION["userExp"];
       $uBasePrice = $_SESSION['userBp'];
+      $ufileName = $_SESSION["userprofile"];
       ?>
-      
+    <img src="uploads/<?php echo $ufileName; ?>" class='profile-pic'>
       <h1 class="heading"><?php echo $uIGN ?></h1>
       
         <p><?php echo $uExp ?></p>
@@ -91,13 +91,6 @@ background: linear-gradient(to right, #ec2F4B, #009FFF);
           <h4>Contact</h4>
           <p><?php echo $uContact ?></p>
         </div>
-        <!-- <div class="col-4">
-          <h4>Profile Image</h4>
-          <form action="includes/userUpImg.inc.php" method="post" enctype = "multipart/form-data">
-          <input type="file" name="file" >
-          <button type="submit" name="user-upload">Upload</button>
-          </form>
-        </div> -->
       </div>
     </div>
   </header>

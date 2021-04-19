@@ -93,7 +93,7 @@ body {
 </head>
 <body>
 <div class="signup-form">
-    <form action="includes/usersignup.inc.php" method="post">
+    <form action="includes/usersignup.inc.php" method="post" enctype="multipart/form-data">
 		<h2>User Sign Up</h2>
 		<p>It's free and only takes a minute.</p>
 
@@ -127,9 +127,14 @@ if (isset($_GET['error'])) {
 	elseif ($_GET['error']== 'IGNexist') {
 	echo "<p style = 'color:red;'> In Game Name already taken. Try different one</p>";
 	}
+	elseif ($_GET['error']== 'FileNameExist') {
+	echo "<p style = 'color:red;'>File name Exist or invalid file type</p>";
+	}
+	
 	elseif ($_GET['error']== 'None') {
 	 echo "<p style = 'color:green;' > You signed up successfully </p>";
 	}
+	
 }
 
 ?>
@@ -147,8 +152,11 @@ if (isset($_GET['error'])) {
             <option value="Female">Female</option>
             <option value="Others">Others</option>
     </select>
-		 
         </div>
+		<div class="form-group">
+		<label for="userprofile">Upload Profile Image :</label>
+		<input type="file" name="userprofile">
+		</div>
         <div class="form-group">
         	<input type="email" class="form-control" name="email" placeholder="Email Address" required="required">
         </div>

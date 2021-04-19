@@ -6,12 +6,21 @@ if (isset($_POST['submit-signup'])) {
     $userName = $_POST['name'];
     $inGameName = $_POST['ign'];
     $gender = $_POST['gender'];
+    $userprofile = $_FILES["userprofile"]["name"];
     $email = $_POST['email']; 
     $contact = $_POST['contact'];
     $experiance = $_POST['experience'];
     $pass = $_POST['pwd'];
     $repass = $_POST['conf-pwd'];
     $basePrice;
+
+    // File Upload variables
+    $targetDir = "uploads/";
+    $fileName = basename($_FILES["userprofile"]["name"]);
+    $targetFilePath = $targetDir . $fileName;
+    $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+    // Allow certain file formats
+    $allowTypes = array('jpg','png','jpeg','gif','pdf');
 
     require_once 'dbh.inc.php';
     require_once 'functions.inc.php';
@@ -45,6 +54,12 @@ if (isset($_POST['submit-signup'])) {
         header('location: ../usersignup.php?error=IGNexist');
         exit();
     }
+    
+    if (file_exists($targetFilePath) && !(in_array($fileType, $allowTypes))) {
+        header('location: ../usersignup.php?error=FileNameExist');
+        exit();
+    }
+   
 
     if ($experiance=='Silver') {
         $basePrice=5;
@@ -54,7 +69,7 @@ if (isset($_POST['submit-signup'])) {
         $basePrice=20;
     }
 
-    createUser($conn,$userName,$inGameName,$gender,$email,$contact,$experiance,$pass,$basePrice);
+    createUser($conn,$userName,$inGameName,$gender,$userprofile,$email,$contact,$experiance,$pass,$basePrice);
 }
 else {
     header('location: ../usersignup.php');
