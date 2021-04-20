@@ -62,6 +62,7 @@ background: linear-gradient(to right, #ec2F4B, #009FFF);
 </style>
 
 <section class="profile">
+<title> Profile | XBID </title>
   <header class="header">
     <div class="details">
     <?php
