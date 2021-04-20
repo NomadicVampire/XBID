@@ -8,7 +8,7 @@ if (isset($_POST['submit-signup'])) {
     $gender = $_POST['gender'];
     $userprofile = $_FILES["userprofile"]["name"];
     $userprofilepicname = $userName;
-    $userprofile = $userName.$userprofile;
+    $userprofile = $inGameName.$userprofile;
 
     $email = $_POST['email']; 
     $contact = $_POST['contact'];
