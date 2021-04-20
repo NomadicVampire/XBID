@@ -16,8 +16,11 @@ This is the project for Online Auction System.
 
 If something left add in this file!
 
+-- version 1.0  for developers
+	add this query in your Database Xbid for upload image funtion to work!
 
-ihv edited this!
+	ALTER TABLE user_details
+	ADD userProfile varchar(1000) DEFAULT 'NA';
 
 
-anything Added!
+	----------x----------x-----------x-------------x
