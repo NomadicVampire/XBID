@@ -99,8 +99,28 @@
     }
 
 </style>
+
+
+
 <body>
-    <div class="main">
+
+<?php
+
+include_once 'includes/dbh.inc.php';
+$sql = "SELECT userId, userName, userInGameName, userContact, userEmail, userExperience, userBasePrice FROM user_details ;";
+$results = mysqli_query($conn, $sql);
+if (mysqli_num_rows($results) > 0) {
+  
+  while ($row = mysqli_fetch_assoc($results)) {
+    $uID = $row['userId'];
+    $uName = $row['userName'];
+    $uIGN = $row['userInGameName'];
+    $uCon = $row['userContact'];
+    $uEma = $row['userEmail'];
+    $uExp = $row['userExperience'];
+    $uBP = $row['userBasePrice'];
+
+    echo '<div class="main">
         <div class="left">
         <div  class="header"><h3>Profile</h3></div>
         <div class="iconic">
@@ -108,13 +128,13 @@
             <i class="icon ion-woman" style="color: white;"></i>
         </div>
         <div class="bio">
-            <li>Name : <a class="details">Sudhanshu Kumar</a></li>
-            <li>In-Game Name : <a class="details">NomadicVampire</a></li>
-            <li>Rank/Rating : <a class="details">NOOB</a></li>
+            <li>Name : '.$uName.' <a class="details"></a></li>
+            <li>In-Game Name : <a class="details">' .$uIGN .'</a></li>
+            <li>Rank/Rating : <a class="details">' .$uExp. '</a></li>
         </div>
         <div class="contact">
-            <li>Email : <a class="details">sudhanshu@gmail.com</a></li>
-            <li>Contact No. : <a class="details">9999999999</a></li>
+            <li>Email : <a class="details">'.$uEma. '</a></li>
+            <li>Contact No. : <a class="details"> '.$uCon.'</a></li>
         </div>
         </div>
         <div class="right">
@@ -123,17 +143,28 @@
                 <i class="icon ion-hammer" style="color: black;"></i>
             </div>
             <div class="currentbid">
-                <li>Current Bid : <a class="details">1000</a></li>
+                <li>Current Bid : <a class="details">'. $uBP.'</a></li>
             </div>
             <div class="urbid">
                 <h5>Your Bid :</h5>
                 <input type="text" class="text-bid" placeholder="Bid value" name = "bidvalue" required="required">
                 <button type="submit" name="submit-bid" class="btn btn-dark btn-block">Bid</button>
+                
 
             </div>
+            
+            
         </div>
+        <button type="submit" name="submit-next" class="btn btn-dark btn-block"><a href="includes/auction.inc.php?id=' .$uID .'">Next</a> </button>
 
-    </div>
+        </div>';
+
+  }
+  
+        
+}
+?>
+    
 
 </body>
 </html>
