@@ -7,6 +7,9 @@ if (isset($_POST['submit-signup'])) {
     $inGameName = $_POST['ign'];
     $gender = $_POST['gender'];
     $userprofile = $_FILES["userprofile"]["name"];
+    $userprofilepicname = $userName;
+    $userprofile = $userName.$userprofile;
+
     $email = $_POST['email']; 
     $contact = $_POST['contact'];
     $experiance = $_POST['experience'];
@@ -55,8 +58,8 @@ if (isset($_POST['submit-signup'])) {
         exit();
     }
     
-    if (file_exists($targetFilePath) && !(in_array($fileType, $allowTypes))) {
-        header('location: ../usersignup.php?error=FileNameExist');
+    if (!(in_array($fileType, $allowTypes))) {
+        header('location: ../usersignup.php?error=InvalidFileType');
         exit();
     }
    
@@ -69,7 +72,23 @@ if (isset($_POST['submit-signup'])) {
         $basePrice=20;
     }
 
+    // Code to upload file locally    
+    $uploaddir = '../uploads/';
+    $uploadfile = $uploaddir . $userprofile;
+    $tmp_name = $_FILES["userprofile"]["tmp_name"];
+
+    if (move_uploaded_file($tmp_name, $uploadfile)) {
+    echo "File is valid, and was successfully uploaded.\n";
+    } else {
+        header('location: ../usersignup.php?error=UploadFailed');
+        exit();
+    }    
+    
+
     createUser($conn,$userName,$inGameName,$gender,$userprofile,$email,$contact,$experiance,$pass,$basePrice);
+
+    
+
 }
 else {
     header('location: ../usersignup.php');

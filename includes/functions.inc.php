@@ -99,7 +99,9 @@ function IGNExists($conn, $inGameName, $email){
         $result = false;
         return $result;
     }
+    
 
+    
     mysqli_stmt_close($stmt);
 
 }
@@ -114,11 +116,16 @@ function createUser($conn,$userName,$inGameName,$gender,$userprofile,$email,$con
     
     $hashedPwd = password_hash($pass, PASSWORD_DEFAULT);
 
+    
     mysqli_stmt_bind_param($stmt,"sssssssss", $userName,$inGameName,$gender,$userprofile,$email,$contact,$experiance, $hashedPwd,$basePrice); // Binds variables to a prepared statement as parameters
     mysqli_stmt_execute($stmt); //Executes a prepared statement
-    mysqli_stmt_close($stmt);
+
+    mysqli_stmt_close($stmt); //Closing the statement
     header('location: ../usersignup.php?error=None');
     exit();
+
+    
+    
     
 
 }

@@ -127,8 +127,8 @@ if (isset($_GET['error'])) {
 	elseif ($_GET['error']== 'IGNexist') {
 	echo "<p style = 'color:red;'> In Game Name already taken. Try different one</p>";
 	}
-	elseif ($_GET['error']== 'FileNameExist') {
-	echo "<p style = 'color:red;'>File name Exist or invalid file type</p>";
+	elseif ($_GET['error']== 'InvalidFileType') {
+	echo "<p style = 'color:red;'>Invalid file type</p>";
 	}
 	
 	elseif ($_GET['error']== 'None') {
