@@ -10,11 +10,11 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
 
 
-
-.container {
+.container{
+  display: flex;
   flex-wrap: wrap;
-  
-} 
+}
+
 
  .card {
   margin: 1rem;
@@ -24,12 +24,13 @@
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 12px 32px 4px rgba(black, .2);
+  display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   transition: .2s;
-  
+ 
   &:hover {
     transform: translateY(-5px);
   } 
@@ -42,9 +43,6 @@
     transition: .2s;
     cursor: pointer;
     
-   
-    
-  
   
   .desc {
     text-align: center;
