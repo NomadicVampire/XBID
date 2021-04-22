@@ -88,8 +88,8 @@ span{
 .image{
     padding-left: 120px;
 }
-.time{
-    padding-left: 250px;   
+#timer{
+    padding-left: 150px;   
 }
 a{
     font-family: 'Original Surfer', cursive;
@@ -119,7 +119,7 @@ a{
     <div class="col">
         <div class="header"><h3>Auction</h3></div>
         <ul class="list-group-bid">
-            <li class="time">Time Remaining : 12:30</li>
+            <h3 id = "timer">Time Left : <span id="countdowntimer">12</span>sec</h3>
             <br>
             <br>
             <li>Current Bid : <a class="details">100</a></li><br>
@@ -128,15 +128,35 @@ a{
             <li>Your Bid : <a class="details">100</a></li><br>
             <div class="valuebid">
             <span>Bid :</span>
-                <input type="password" class="form-control" id="inputPassword2" placeholder="Bid Value">
+                <input type="text" class="form-control" id="inputPassword2" placeholder="Bid Value">
                 <button type="submit" class="btn btn-primary mb-2">Bid</button>
             </div>
         </ul>
     </div>
   </div>
 </body>
+
 </html>
+
 <?php
+$TimeLeft = 10;
+echo '<script type="text/javascript">
+var timeleft = 12;
+var downloadTimer = setInterval(function(){
+timeleft--;
+document.getElementById("countdowntimer").textContent = timeleft;
+if(timeleft <= 0)
+    clearInterval(downloadTimer);
+    $TimeLeft--;
+},1000);
+</script>';
+$TimeLeft = 0;
+
+// if($TimeLeft <0){
+//     header('location: ../index.php');
+//     exit();
+// }
+
 
 include_once 'assets/footer.php';
 
