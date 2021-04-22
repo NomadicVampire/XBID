@@ -6,7 +6,7 @@
 <section> 
 
     <p>hello ADMIN <br>
-        GAND MARAO!
+        
     </p>
 
 </section>

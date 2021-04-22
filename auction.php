@@ -1,6 +1,5 @@
 <?php
-
-  include_once 'assets/header.php';
+    include_once "assets/header.php";
 
 ?>
 <!DOCTYPE html>
@@ -16,7 +15,8 @@
     <title>Auction</title>
 </head>
 <style>
-.header{
+
+.header1{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -52,7 +52,7 @@
     border-radius: 50%;
     border: 2px solid #fff;
 }
-.header{
+.header1{
 	font-size: 15rem;
 	text-align: center;
     height:10vh;
@@ -109,64 +109,103 @@ td{
 
 
 </style>
-<body>
-<div class="container">
-  <div class="row">
-    <div class="col">
-        <div class="header"><h3>Profile</h3></div>
-        <ul class="list-group-bio">
-            <br>
-            <div class="image">
-                <img class=" profile-pic"src="https://cdn.mos.cms.futurecdn.net/MMwRCjVEaoJPP4dBBugWFY-1024-80.jpg.webp" alt="Profile Image">
-            </div>
-            <br>
-            <li class="name">Name : <a class="details">Sudhanshu</a></li><br>
-            <li class="name">In-Game Name : <a class="details">NomadicVampire</a></li><br>
-            <li class="name">Rank : <a class="details">Diamond</a></li><br>
-            <li class="name">Email : <a class="details">sudhanshu@gmail.com</a></li><br>
-            <li class="name">Contact No. : <a class="details ">9393939393</a></li><br>   
-        </ul>
-        
-    </div>
-    <div class="col">
-        <div class="header"><h3>Auction</h3></div>
-        <ul class="list-group-bid">
-            <h3 id = "timer">Time Left : <span id="countdowntimer">12</span>sec</h3>
-<<<<<<< HEAD
-            <br>
-=======
->>>>>>> 837a7833c6ce12f68af2551fca1c3a4534cbbdb3
-            <br>
-            <li class="name">Current Bid : <a class="details">100</a></li><br>
-            <table>
-                <tr class="owner">
-                    <td>Current Owner</td>
-                    <td>Your Remining Bid</td>
-                    <td>Your Bid</td>
-                </tr>
-                <tr class="values">
-                    <td>Sahil Kumar Meena</td>
-                    <td>950</td>
-                    <td>100</td>
-                </tr>
-            </table>
-            <br>
-            <div class="valuebid">
-            <span>Bid :</span>
-                <input type="text" class="form-control" id="inputPassword2" placeholder="Bid Value">
-                <button type="submit" class="btn btn-primary mb-2">Bid</button>
-            </div>
-        </ul>
-    </div>
-  </div>
-</body>
 
-</html>
 
 <?php
-$TimeLeft = 10;
-echo '<script type="text/javascript">
-var timeleft = 12;
+
+include_once 'includes/dbh.inc.php';
+//user sql 
+$sql = "SELECT * FROM user_details ;";
+$results = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($results) > 0)  {
+  
+  while ($row = mysqli_fetch_assoc($results)) {
+    $i=0;  
+    $ID = $row['userId'];
+    // $ID = $ID+$i;
+    $name = $row['userName'];
+    $IGN = $row['userInGameName'];
+    $con = $row['userContact'];
+    $ema = $row['userEmail'];
+    $pro = $row['userProfile'];
+    $rank = $row['userExperience'];
+  }
+}
+// admin sql
+// $auction_sql = "SELECT * FROM auction_details ;";
+// $auction_results = mysqli_query($conn, $auction_sql);
+
+// if (mysqli_num_rows($auction_results) > 0 ) {
+//     while ($auction_row = mysqli_fetch_assoc($auction_results)) {
+        
+//         $iniBasePrice = $auction_row['initialBase'];
+        
+//       }
+// }
+  
+
+  
+?>
+    <section>
+    <title>Join Auction | XBID</title>
+     <div class="container">
+     <div class="row">
+         <div class="col">
+             <div class="header1"><h3>Profile</h3></div>
+             <ul class="list-group-bio">
+                 <br>
+                 <div class="image">
+                     <img class=" profile-pic"src="https://cdn.mos.cms.futurecdn.net/MMwRCjVEaoJPP4dBBugWFY-1024-80.jpg.webp" alt="Profile Image">
+                 </div>
+                 <li class="name">Name : <a class="details"><?php echo $name; ?></a></li><br>
+                 <li class="name">In-Game Name : <a class="details"><?php echo $IGN; ?></a></li><br>
+                 <li class="name">Rank : <a class="details"><?php echo $rank; ?></a></li><br>
+                 <li class="name">Email : <a class="details"><?php echo $ema; ?></a></li><br>
+                 <li class="name">Contact No. : <a class="details "><?php echo $con; ?></a></li><br>   
+             </ul>
+             
+         </div>
+         <div class="col">
+             <div class="header1"><h3>Auction</h3></div>
+             <ul class="list-group-bid">
+                 <h3 id = "timer">Time Left : <span id="countdowntimer">12</span>sec</h3>
+                 <br>
+                 <br>
+                 <li class="name">Current Bid : <a class="details">100</a></li><br> <!--  here we add php tag and add finalPrice variable -->
+                 <table>
+                    <tr class="owner">
+                        <td>Current Owner</td>
+                        <td>Your Remining Bid</td>
+                        <td>Your Bid</td>
+                    </tr>
+                    <tr class="values">
+                        <td>Sahil Kumar Meena</td> <!--  here we add php tag and add owner variable -->
+                        <td>950</td>
+                        <td>100</td>
+                    </tr>
+                </table>
+                <br>
+                 <div class="valuebid">
+                 <span>Bid :</span>
+                     <input type="text" class="form-control" id="inputPassword2" placeholder="Bid Value">
+                     <button type="submit" class="btn btn-primary mb-2">Bid</button>
+                 </div>
+             </ul>
+         </div>
+     </div>
+     </section>
+    
+    
+
+
+
+
+   
+ 
+
+<script type="text/javascript">
+var timeleft = 15;
 var downloadTimer = setInterval(function(){
 timeleft--;
 document.getElementById("countdowntimer").textContent = timeleft;
@@ -174,14 +213,10 @@ if(timeleft <= 0)
     clearInterval(downloadTimer);
     $TimeLeft--;
 },1000);
-</script>';
-$TimeLeft = 0;
+</script>
 
-// if($TimeLeft <0){
-//     header('location: ../index.php');
-//     exit();
-// }
 
+<?php
 
 include_once 'assets/footer.php';
 
