@@ -405,3 +405,31 @@ function loginAdmin($conn,$adminEmail,$adminPwd){
  }
 
  // END --ADMIN ----
+ function intergerCheck($bid){
+    $result;
+    if (preg_match('/^[0-9]$/', $bid)) {
+        return $result = true;
+    }
+    else {
+        $result = false;
+    }
+    return $result;
+
+ }
+
+
+ function reduceOwnerBidAmt($conn,$bid,$ownerID,$useriID){
+    
+    $sql = "UPDATE owner_details SET ownerBidAmt = ownerBidAmt-$bid WHERE ownerId =$ownerID;";
+    $stmt = mysqli_stmt_init($conn); //Initializes a statement and returns an object for use with mysqli_stmt_prepare
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header('location: ../auction.php?error=stmtFailed');
+         exit();
+   } 
+    // mysqli_stmt_bind_param($stmt,"i",$bid); // Binds variables to a prepared statement as parameters
+    mysqli_stmt_execute($stmt); //Executes a prepared statement
+    mysqli_stmt_close($stmt);
+    header('location: ../auction.php?error=None');
+    exit();
+}
+

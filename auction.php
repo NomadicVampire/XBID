@@ -1,5 +1,6 @@
 <?php
     include_once "assets/header.php";
+    $remBid=$_SESSION["ownerBA"];
 
 ?>
 <!DOCTYPE html>
@@ -133,16 +134,22 @@ if (mysqli_num_rows($results) > 0)  {
   }
 }
 // admin sql
-// $auction_sql = "SELECT * FROM auction_details ;";
-// $auction_results = mysqli_query($conn, $auction_sql);
+$auction_sql = "SELECT * FROM auction_details ;";
+$auction_results = mysqli_query($conn, $auction_sql);
 
-// if (mysqli_num_rows($auction_results) > 0 ) {
-//     while ($auction_row = mysqli_fetch_assoc($auction_results)) {
+if (mysqli_num_rows($auction_results) > 0 ) {
+    while ($auction_row = mysqli_fetch_assoc($auction_results)) {
         
-//         $iniBasePrice = $auction_row['initialBase'];
+        $iniBasePrice = $auction_row['initialBase'];
+        $tName = $auction_row['teamName'];
+        $fPrice = $auction_row['finalPrice'];
+        $bPrice = $auction_row['basePrice'];
+        $aStatus = $auction_row['auctionStatus'];
         
-//       }
-// }
+      }
+}
+
+
   
 
   
@@ -172,25 +179,31 @@ if (mysqli_num_rows($results) > 0)  {
                  <h3 id = "timer">Time Left : <span id="countdowntimer">12</span>sec</h3>
                  <br>
                  <br>
-                 <li class="name">Current Bid : <a class="details">100</a></li><br> <!--  here we add php tag and add finalPrice variable -->
+                 <li class="name">Current Bid : <a class="details"><?php echo $bPrice; ?></a></li><br> <!--  here we add php tag and add finalPrice variable -->
                  <table>
                     <tr class="owner">
-                        <td>Current Owner</td>
-                        <td>Your Remining Bid</td>
-                        <td>Your Bid</td>
+                        <td>Current Team Owner</td>
+                        <td>Remaining Bid</td>
+                        <td>Total Bid</td>
                     </tr>
                     <tr class="values">
-                        <td>Sahil Kumar Meena</td> <!--  here we add php tag and add owner variable -->
-                        <td>950</td>
+                        <td><?php echo $tName; ?></td> <!--  here we add php tag and add owner variable -->
+                        <td><?php echo $remBid; ?></td>
                         <td>100</td>
                     </tr>
                 </table>
                 <br>
-                 <div class="valuebid">
-                 <span>Bid :</span>
-                     <input type="text" class="form-control" id="inputPassword2" placeholder="Bid Value">
-                     <button type="submit" class="btn btn-primary mb-2">Bid</button>
-                 </div>
+                
+
+                <?php echo "<div class='valuebid'>
+                <span>Bid :</span>
+                <form action='includes/auction.inc.php?uid=".$ID ."' method='post'>
+                <input type='text' class='form-control' name = 'bid-value' placeholder='Bid Value'>
+                <button type='submit' name='bid-submit' class='btn btn-primary mb-2'>Bid</button>
+                </form>
+                </div>";
+                 
+                 ?>
              </ul>
          </div>
      </div>
