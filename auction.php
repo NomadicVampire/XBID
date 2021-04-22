@@ -132,7 +132,10 @@ td{
         <div class="header"><h3>Auction</h3></div>
         <ul class="list-group-bid">
             <h3 id = "timer">Time Left : <span id="countdowntimer">12</span>sec</h3>
+<<<<<<< HEAD
             <br>
+=======
+>>>>>>> 837a7833c6ce12f68af2551fca1c3a4534cbbdb3
             <br>
             <li class="name">Current Bid : <a class="details">100</a></li><br>
             <table>
