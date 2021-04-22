@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Niconne&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orelega+One&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Original+Surfer&display=swap" rel="stylesheet">
     <title>Auction</title>
@@ -27,7 +27,7 @@
     padding-left: 100px ;
     border: black solid 2px;
     border-radius: 10px;
-    height: 52vh;
+    height: 400px;
     background-color: #f9c5d1;
     background-image: linear-gradient(315deg, #f9c5d1 0%, #9795ef 74%);
 }
@@ -37,7 +37,7 @@
     padding-left: 100px;
     border: black solid 2px;
     border-radius: 10px;
-    height: 52vh;
+    height: 400px;
     background-color: #f9c5d1;
     background-image: linear-gradient(315deg, #f9c5d1 0%, #9795ef 74%);
 }
@@ -62,18 +62,17 @@
     border-radius: 10px;
 	background-color: #e288f9;
     background-image: linear-gradient(315deg, #e288f9 0%, #ffc988 74%);
-	font-family: 'Niconne', cursive;
+	font-family: 'Merriweather', serif;
 	font-weight: 800;  
 }
 li{
     list-style-type: none;
-    font-family: 'Orelega One', cursive;
+    
 }
-.name{
-    padding-top: 30px;
-}
+
 .details{
     padding-left: 10px;
+    font-family: 'Original Surfer', cursive;
 }
 .valuebid{
     display: flex;
@@ -88,13 +87,25 @@ span{
 .image{
     padding-left: 120px;
 }
-.time{
-    padding-left: 250px;   
+#timer{
+    padding-left: 150px;   
 }
-a{
-    font-family: 'Original Surfer', cursive;
+ .name{
+    
+    font-family: 'Orelega One', cursive;
 }
 
+
+td{
+    padding: 10px 10px 10px 0;
+    /* text-align: center; */
+}
+.owner{
+    font-family: 'Orelega One', cursive;
+}
+.values{
+    font-family: 'Original Surfer', cursive;
+}
 
 
 </style>
@@ -108,35 +119,66 @@ a{
             <div class="image">
                 <img class=" profile-pic"src="https://cdn.mos.cms.futurecdn.net/MMwRCjVEaoJPP4dBBugWFY-1024-80.jpg.webp" alt="Profile Image">
             </div>
+            <br>
             <li class="name">Name : <a class="details">Sudhanshu</a></li><br>
-            <li>In-Game Name : <a class="details">NomadicVampire</a></li><br>
-            <li>Rank : <a class="details">Diamond</a></li><br>
-            <li>Email : <a class="details">sudhanshu@gmail.com</a></li><br>
-            <li>Contact No. : <a class="details ">9393939393</a></li><br>   
+            <li class="name">In-Game Name : <a class="details">NomadicVampire</a></li><br>
+            <li class="name">Rank : <a class="details">Diamond</a></li><br>
+            <li class="name">Email : <a class="details">sudhanshu@gmail.com</a></li><br>
+            <li class="name">Contact No. : <a class="details ">9393939393</a></li><br>   
         </ul>
         
     </div>
     <div class="col">
         <div class="header"><h3>Auction</h3></div>
         <ul class="list-group-bid">
-            <li class="time">Time Remaining : 12:30</li>
+            <h3 id = "timer">Time Left : <span id="countdowntimer">12</span>sec</h3>
             <br>
             <br>
-            <li>Current Bid : <a class="details">100</a></li><br>
-            <li>Current Owner : <a class="details">Sahil Kumar Meena</a></li><br>
-            <li>Your Remining Bid : <a class="details">950</a></li><br>
-            <li>Your Bid : <a class="details">100</a></li><br>
+            <li class="name">Current Bid : <a class="details">100</a></li><br>
+            <table>
+                <tr class="owner">
+                    <td>Current Owner</td>
+                    <td>Your Remining Bid</td>
+                    <td>Your Bid</td>
+                </tr>
+                <tr class="values">
+                    <td>Sahil Kumar Meena</td>
+                    <td>950</td>
+                    <td>100</td>
+                </tr>
+            </table>
+            <br>
             <div class="valuebid">
             <span>Bid :</span>
-                <input type="password" class="form-control" id="inputPassword2" placeholder="Bid Value">
+                <input type="text" class="form-control" id="inputPassword2" placeholder="Bid Value">
                 <button type="submit" class="btn btn-primary mb-2">Bid</button>
             </div>
         </ul>
     </div>
   </div>
 </body>
+
 </html>
+
 <?php
+$TimeLeft = 10;
+echo '<script type="text/javascript">
+var timeleft = 12;
+var downloadTimer = setInterval(function(){
+timeleft--;
+document.getElementById("countdowntimer").textContent = timeleft;
+if(timeleft <= 0)
+    clearInterval(downloadTimer);
+    $TimeLeft--;
+},1000);
+</script>';
+$TimeLeft = 0;
+
+// if($TimeLeft <0){
+//     header('location: ../index.php');
+//     exit();
+// }
+
 
 include_once 'assets/footer.php';
 

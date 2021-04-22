@@ -6,15 +6,10 @@
 <style>
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
 
-
-/* .container{
-  display: flex;
-  flex-wrap: wrap;
-  
-} */
-.containers1 {
+ 
+ .containers1 {
     display: inline-block;
-    width: 31.4%;
+    width: 460px;
     padding-right: 15px;
     padding-left: 15px;
     margin-right: 10px;
@@ -30,11 +25,11 @@
 }
 
  .card {
-  margin: 1rem;
+  margin: 30px auto;
   width: 330px;
   height: 355px;
   padding: .5rem 1rem;
-  background-color: ##d6436c0f;
+  background-color: #d6436c0f;
   border-radius: 8px;
   box-shadow: 0 12px 32px 4px rgb(41 36 36 / 94%);
   display: flex;
@@ -79,6 +74,7 @@ if (mysqli_num_rows($results) > 0) {
     $pro = $row['userProfile'];;
     
     ?>
+   
       <div class ='containers1'>
       <div class='card'>
       
