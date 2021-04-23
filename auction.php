@@ -1,6 +1,8 @@
 <?php
     include_once "assets/header.php";
+    
     $usercount = 1;
+    $timer = 15;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,16 +97,21 @@ span{
     
     font-family: 'Orelega One', cursive;
 }
-
-
-td{
-    padding: 10px 10px 10px 0;
-    /* text-align: center; */
+.stats {
+  display: flex;
+  justify-content: space-around;
 }
-.owner{
+
+.stats .col-3 {
+  width: 5rem;
+  text-align: center;
+  padding: 10px 0 0 0;
+}
+.head{
     font-family: 'Orelega One', cursive;
+    text-align: center;
 }
-.values{
+p{
     font-family: 'Original Surfer', cursive;
 }
 
@@ -190,21 +197,24 @@ if (mysqli_num_rows($auction_results) > 0 ) {
          <div class="col">
              <div class="header1"><h3>Auction</h3></div>
              <ul class="list-group-bid">
-                 <h3 id = "timer">Time Left : <span id="countdowntimer">12</span>sec</h3>
+                 <h3 id = "timer">Time Left : <span id="countdowntimer">15</span>sec</h3>
                  <br>
                  <br>
                  <li class="name">Current Bid : <a class="details"><?php echo $bPrice; ?></a></li><br> <!--  here we add php tag and add finalPrice variable -->
-                 <table>
-                    <tr class="owner">
-                        <td>Current Team Owner</td>
-                        <td>Remaining Bid</td>
-                        <td>Total Bid</td>
-                    </tr>
-                    <tr class="values" id ='valVal'>
-                        <td><?php echo $tName; ?></td> <!--  here we add php tag and add owner variable -->
-                        <td><?php echo $varRemBid; ?></td>
-                        <td>100</td>
-                    </tr>
+                 <div class="stats">
+                <div class="col-3">
+                    <p class="head">Current Owner</p>
+                    <p><?php echo $tName; ?></p>
+                </div>
+                <div class="col-3">
+                    <p class="head">Remaining Bid</p>
+                    <p><?php echo $varRemBid; ?></p>
+                </div>
+                <div class="col-3">
+                    <p class="head">Total Bid</p>
+                    <p>100</p>
+                </div>
+                
                     <?php
                     if (isset($_GET['error'])) {
                     if ($_GET['error']== 'intergerError') {
@@ -219,7 +229,8 @@ if (mysqli_num_rows($auction_results) > 0 ) {
                 }
 
                     ?>
-                </table>
+                </div>
+                <br>
                 <br>
                 
 
@@ -228,10 +239,15 @@ if (mysqli_num_rows($auction_results) > 0 ) {
                 <form action='includes/auction.inc.php?uid=".$ID ."&bp=".$bPrice."&tn=".$tName."' method='post'>
                 <input type='text' class='form-control' name = 'bid-value' placeholder='Bid Value'>
                 <button type='submit' name='bid-submit' class='btn btn-primary mb-2'>Bid</button>
+                <button type='submit' name='bid-next' class='btn btn-primary mb-2'><a href='auction.php'>Next</a></button>
+   
                 </form>
                 </div>";
                  
+                
+                
                  ?>
+                 
              </ul>
          </div>
      </div>
@@ -247,8 +263,6 @@ timeleft--;
 document.getElementById("countdowntimer").textContent = timeleft;
 if(timeleft <= 0)
     clearInterval(downloadTimer);
-    <?php $usercount++ ; ?>
-    $TimeLeft--;
 },1000);
 </script>
 

@@ -458,6 +458,7 @@ function returnbidvalue($conn,$baseP,$tna){
    } 
    mysqli_stmt_execute($stmt);  //Executes a prepared statement
    mysqli_stmt_close($stmt);
+    
     header('location: ../auction.php?error=bidPlaced!');
    
  }
