@@ -133,6 +133,8 @@ if (mysqli_num_rows($results) > 0)  {
     $rank = $row['userExperience'];
   
 }
+
+// extracting remaining bid amt from owner_details
 $oid = $_SESSION['ownerid'];
 $owner_sql = "SELECT * FROM owner_details WHERE ownerId = $oid ;";
 $owner_results = mysqli_query($conn, $owner_sql);
@@ -141,13 +143,13 @@ if (mysqli_num_rows($owner_results) > 0)  {
   
   $owner_row = mysqli_fetch_assoc($owner_results) ;
 
-    $varRemBid = $owner_row['ownerBidAmt'];
+    $varRemBid = $owner_row['ownerBidAmt']; 
 
 }
 
 
 
-// admin sql
+// auction_details sql
 $auction_sql = "SELECT * FROM auction_details ";
 $auction_results = mysqli_query($conn, $auction_sql);
 
@@ -165,10 +167,6 @@ if (mysqli_num_rows($auction_results) > 0 ) {
       }
 
 
-
-  
-
-  
 ?>
     <section>
     <title>Join Auction | XBID</title>
@@ -207,6 +205,20 @@ if (mysqli_num_rows($auction_results) > 0 ) {
                         <td><?php echo $varRemBid; ?></td>
                         <td>100</td>
                     </tr>
+                    <?php
+                    if (isset($_GET['error'])) {
+                    if ($_GET['error']== 'intergerError') {
+                    echo "<p style = 'color:red;'>Please enter a VALID Bid Amount</p>";
+                    }
+                    if ($_GET['error']== 'bidamtError') {
+                    echo "<p style = 'color:red;'>Please enter a bid value greater than Current Price</p>";
+                    }
+                    if ($_GET['error']== 'bidPlaced!') {
+                    echo "<p style = 'color:green;'>Your Bid is placed successfully !</p>";
+                    }
+                }
+
+                    ?>
                 </table>
                 <br>
                 
@@ -227,11 +239,6 @@ if (mysqli_num_rows($auction_results) > 0 ) {
 
     
 
-
-
-
-   
- 
 
 <script type="text/javascript">
 var timeleft = 15;

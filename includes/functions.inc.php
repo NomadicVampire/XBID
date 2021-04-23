@@ -407,7 +407,7 @@ function loginAdmin($conn,$adminEmail,$adminPwd){
  // END --ADMIN ----
  function intergerCheck($bid){
     $result;
-    if (preg_match('/^[0-9]$/', $bid)) {
+    if (preg_match('/^[1-9][0-9]{0,3}$/', $bid)) {
         return $result = true;
     }
     else {
@@ -458,7 +458,7 @@ function returnbidvalue($conn,$baseP,$tna){
    } 
    mysqli_stmt_execute($stmt);  //Executes a prepared statement
    mysqli_stmt_close($stmt);
-    header('location: ../auction.php?error=None');
+    header('location: ../auction.php?error=bidPlaced!');
    
  }
 
