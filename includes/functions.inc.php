@@ -398,7 +398,7 @@ function loginAdmin($conn,$adminEmail,$adminPwd){
         $_SESSION["adminid"] = $adminExists["adminId"];
         $_SESSION["adminemail"] = $adminExists["adminEmail"];
 
-        header("location: ../adminprofile.php");
+        header("location: ../admin.php");
         exit();
 
     }
@@ -417,8 +417,53 @@ function loginAdmin($conn,$adminEmail,$adminPwd){
 
  }
 
+ function fetchDetails($conn,$useriID){
+    $varTeamName;
+    $resu;
+    $sql = "SELECT teamName FROM auction_details WHERE userID = $useriID ;";
+    $results = mysqli_query($conn, $sql);
 
- function reduceOwnerBidAmt($conn,$bid,$ownerID,$useriID){
+    if (mysqli_num_rows($results) > 0)  {
+    $row = mysqli_fetch_assoc($results); 
+    $varTeamName = $row['teamName'];
+    
+    }
+    if ($varTeamName == 'NA') {
+        $resu = true;
+    }else {
+        $resu = false;
+    }
+    return $resu;
+ }
+
+function returnbidvalue($conn,$baseP,$tna){
+    $sql = "UPDATE owner_details SET ownerBidAmt = ownerBidAmt+$baseP WHERE ownerTeamName = '".$tna."';";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header('location: ../auction.php?error=stmtFailedRV');
+         exit();
+   } 
+   mysqli_stmt_execute($stmt);  //Executes a prepared statement
+   mysqli_stmt_close($stmt);
+//    header('location: ../auction.php?error=None');
+   
+ }
+
+ function updateAuctionDetails($conn,$bid,$ownerTeamName,$useriID){
+    $sql = "UPDATE auction_details SET basePrice= $bid , finalPrice = $bid , teamName = '" .$ownerTeamName."' WHERE userID= $useriID;";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header('location: ../auction.php?error=stmtFailedAD');
+         exit();
+   } 
+   mysqli_stmt_execute($stmt);  //Executes a prepared statement
+   mysqli_stmt_close($stmt);
+    header('location: ../auction.php?error=None');
+   
+ }
+
+
+ function reduceOwnerBidAmt($conn,$bid,$ownerID){
     
     $sql = "UPDATE owner_details SET ownerBidAmt = ownerBidAmt-$bid WHERE ownerId =$ownerID;";
     $stmt = mysqli_stmt_init($conn); //Initializes a statement and returns an object for use with mysqli_stmt_prepare
@@ -429,7 +474,6 @@ function loginAdmin($conn,$adminEmail,$adminPwd){
     // mysqli_stmt_bind_param($stmt,"i",$bid); // Binds variables to a prepared statement as parameters
     mysqli_stmt_execute($stmt); //Executes a prepared statement
     mysqli_stmt_close($stmt);
-    header('location: ../auction.php?error=None');
-    exit();
+    // header('location: ../auction.php?error=None');
+    
 }
-

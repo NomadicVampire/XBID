@@ -27,7 +27,7 @@
   height: 100vh;
 }
 
-p {
+p1 {
   position: relative;
   font-family: sans-serif;
   text-transform: uppercase;
@@ -35,7 +35,7 @@ p {
   letter-spacing: 4px;
   overflow: hidden;
   background: linear-gradient(90deg, #000, #fff, #000);
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   background-size: 80%;
   animation: animate 3s linear infinite;
   -webkit-background-clip: text;
@@ -61,16 +61,26 @@ p {
       padding-top: 100px;
       font-family: 'Architects Daughter', cursive;
 }
+.button1{
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding-top: 100px;
+      font-family: 'Architects Daughter', cursive;
+}
 
 
 </style>
 <body>
     <header class="header">
-      <p>Welcome Admin</p>
+      <p1>Welcome Admin</p1>
       <div class="button">
         <button type="button" class="btn btn-primary btn-lg"><h3>Start Auction</h3></button>
       </div>
-      
+      <div class="button1">
+        <button type="button" class="btn btn-primary btn-sm"><h3>Fetch Data</h3></button>
+        <button type="button" class="btn btn-primary btn-sm"><h3>Clear Record</h3></button>
+      </div>
     </header>
 </body>
 </html>

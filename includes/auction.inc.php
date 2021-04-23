@@ -3,6 +3,9 @@
 session_start();
 if (isset($_POST['bid-submit'])) {
     $useriID = $_GET['uid'];
+    $baseP = $_GET['bp'];
+    $remB = $_GET['rb'];
+    $tna = $_GET['tn'];
     $bid=$_POST['bid-value'];
     $ownerID=$_SESSION['ownerid'];
     $ownerTeamName=$_SESSION['ownertn'];
@@ -19,12 +22,20 @@ if (isset($_POST['bid-submit'])) {
     //  echo $bid;
     //  echo $ownerID;
     //  echo $ownerTeamName;
+    //  echo $baseP;
+    //  echo $tna;
+    
+    
 
-    $isql = "UPDATE auction_details SET basePrice = $bid , finalPrice = $bid , teamName = $ownerTeamName WHERE userID = $useriID ;";
-    mysqli_query($conn, $isql);
-
-
-    reduceOwnerBidAmt($conn,$bid,$ownerID,$useriID,$ownerTeamName);
+    // fetchDetails($conn,$useriID);
+    if (!fetchDetails($conn,$useriID)) {
+      returnbidvalue($conn,$baseP,$tna);
+    }
+    reduceOwnerBidAmt($conn,$bid,$ownerID);
+    updateAuctionDetails($conn,$bid,$ownerTeamName,$useriID);  
+    
+    
+    
     
 
 }else {

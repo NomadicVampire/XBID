@@ -1,7 +1,6 @@
 <?php
     include_once "assets/header.php";
-    $remBid=$_SESSION["ownerBA"];
-
+    $usercount = 1;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -91,7 +90,8 @@ span{
 #timer{
     padding-left: 150px;   
 }
- .name{
+
+.name{
     
     font-family: 'Orelega One', cursive;
 }
@@ -115,30 +115,44 @@ td{
 <?php
 
 include_once 'includes/dbh.inc.php';
+
+
 //user sql 
-$sql = "SELECT * FROM user_details ;";
+$sql = "SELECT * FROM user_details WHERE userID = $usercount;";
 $results = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($results) > 0)  {
   
-  while ($row = mysqli_fetch_assoc($results)) {
-    $i=0;  
+  $row = mysqli_fetch_assoc($results) ;
     $ID = $row['userId'];
-    // $ID = $ID+$i;
     $name = $row['userName'];
     $IGN = $row['userInGameName'];
     $con = $row['userContact'];
     $ema = $row['userEmail'];
     $pro = $row['userProfile'];
     $rank = $row['userExperience'];
-  }
+  
 }
+$oid = $_SESSION['ownerid'];
+$owner_sql = "SELECT * FROM owner_details WHERE ownerId = $oid ;";
+$owner_results = mysqli_query($conn, $owner_sql);
+
+if (mysqli_num_rows($owner_results) > 0)  {
+  
+  $owner_row = mysqli_fetch_assoc($owner_results) ;
+
+    $varRemBid = $owner_row['ownerBidAmt'];
+
+}
+
+
+
 // admin sql
-$auction_sql = "SELECT * FROM auction_details ;";
+$auction_sql = "SELECT * FROM auction_details ";
 $auction_results = mysqli_query($conn, $auction_sql);
 
 if (mysqli_num_rows($auction_results) > 0 ) {
-    while ($auction_row = mysqli_fetch_assoc($auction_results)) {
+    $auction_row = mysqli_fetch_assoc($auction_results) ;
         
         $iniBasePrice = $auction_row['initialBase'];
         $tName = $auction_row['teamName'];
@@ -146,8 +160,10 @@ if (mysqli_num_rows($auction_results) > 0 ) {
         $bPrice = $auction_row['basePrice'];
         $aStatus = $auction_row['auctionStatus'];
         
+      }else {
+         echo 'no user found!';
       }
-}
+
 
 
   
@@ -186,9 +202,9 @@ if (mysqli_num_rows($auction_results) > 0 ) {
                         <td>Remaining Bid</td>
                         <td>Total Bid</td>
                     </tr>
-                    <tr class="values">
+                    <tr class="values" id ='valVal'>
                         <td><?php echo $tName; ?></td> <!--  here we add php tag and add owner variable -->
-                        <td><?php echo $remBid; ?></td>
+                        <td><?php echo $varRemBid; ?></td>
                         <td>100</td>
                     </tr>
                 </table>
@@ -197,7 +213,7 @@ if (mysqli_num_rows($auction_results) > 0 ) {
 
                 <?php echo "<div class='valuebid'>
                 <span>Bid :</span>
-                <form action='includes/auction.inc.php?uid=".$ID ."' method='post'>
+                <form action='includes/auction.inc.php?uid=".$ID ."&bp=".$bPrice."&tn=".$tName."' method='post'>
                 <input type='text' class='form-control' name = 'bid-value' placeholder='Bid Value'>
                 <button type='submit' name='bid-submit' class='btn btn-primary mb-2'>Bid</button>
                 </form>
@@ -208,7 +224,7 @@ if (mysqli_num_rows($auction_results) > 0 ) {
          </div>
      </div>
      </section>
-    
+
     
 
 
@@ -224,6 +240,7 @@ timeleft--;
 document.getElementById("countdowntimer").textContent = timeleft;
 if(timeleft <= 0)
     clearInterval(downloadTimer);
+    <?php $usercount++ ; ?>
     $TimeLeft--;
 },1000);
 </script>
