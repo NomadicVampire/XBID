@@ -438,7 +438,7 @@ function loginAdmin($conn,$adminEmail,$adminPwd){
  }
 
 function returnbidvalue($conn,$baseP,$tna){
-    $sql = "UPDATE owner_details SET ownerBidAm = ownerBidAmt+$baseP WHERE ownerTeamName = '".$tna."';";
+    $sql = "UPDATE owner_details SET ownerBidAmt = ownerBidAmt+$baseP WHERE ownerTeamName = '".$tna."';";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header('location: ../auction.php?error=stmtFailedRV');
