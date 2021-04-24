@@ -221,7 +221,7 @@ if (mysqli_num_rows($auction_results) > 0 ) {
          <div class="col">
              <div class="header1"><h3>Auction</h3></div>
              <ul class="list-group-bid">
-                 <h3 id = "timer">Time Left : <span id="countdowntimer">15</span>sec</h3>
+                 
                  <br>
                  <li class="name">Current Bid : <a class="details"><?php echo $bPrice; ?></a></li><br> <!--  here we add php tag and add finalPrice variable -->
                  <li>
@@ -307,15 +307,6 @@ if (mysqli_num_rows($auction_results) > 0 ) {
     
 
 
-<script type="text/javascript">
-var timeleft = 15;
-var downloadTimer = setInterval(function(){
-timeleft--;
-document.getElementById("countdowntimer").textContent = timeleft;
-if(timeleft <= 0)
-    clearInterval(downloadTimer);
-},1000);
-</script>
 
 
 <?php

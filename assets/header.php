@@ -20,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&family=Fredoka+One&display=swap" rel="stylesheet">
-
+ 
   </head>
   <body>
     <style>
@@ -51,9 +51,25 @@
         echo '<li class="nav-item">
         <a class="nav-link active" aria-current="page" href="userprofile.php">Profile</a>
       </li>';
+      $checkStatus = mysqli_query($conn,"SELECT auctionResult FROM auction_details WHERE auctionResult=0;");
+      $checkStatusOne = mysqli_query($conn,"SELECT auctionResult FROM auction_details WHERE auctionResult=1;");   
+      if(mysqli_num_rows($checkStatus) > 0){
+
         echo '<li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="result.php">View Result</a>
+        <a class="nav-link active" aria-current="page" href="resultwaitingpage.php">Result</a>
       </li>';
+      }elseif(mysqli_num_rows($checkStatusOne) > 0){
+
+        echo '<li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="result.php">Result</a>
+          </li>';
+      }
+      else{
+        echo '<li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="resultwaitingpage.php">Result</a>
+      </li>';
+      
+      }
         echo '<li class="nav-item">
         <a class="nav-link active" aria-current="page" href="includes/userlogout.inc.php">Log Out</a>
       </li>';
@@ -69,37 +85,49 @@
 
       
       // Checking that auction start or not
-      $checkStatus = mysqli_query($conn,"SELECT auctionStatus FROM auction_details;");
-      if ($row = mysqli_fetch_array($checkStatus)) {
-          $temp = $row['auctionStatus'];
-          if($temp == 0){
+      $checkStatus = mysqli_query($conn,"SELECT auctionStatus FROM auction_details WHERE auctionStatus=0;");  
+      $checkStatusOne = mysqli_query($conn,"SELECT auctionStatus FROM auction_details WHERE auctionStatus=1;");
+          if(mysqli_num_rows($checkStatus) > 0){
+
             echo '<li class="nav-item">
             <a class="nav-link active" aria-current="page" href="waitingpage.php">Join Auction</a>
           </li>';
-          }
-          else{
-          echo '<li class="nav-item">
+          }elseif(mysqli_num_rows($checkStatusOne) > 0){
+
+            echo '<li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="auction.php?uid='.$usercount .'">Join Auction</a>
               </li>';
           }
-        }
+          else{
+            echo '<li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="waitingpage.php">Join Auction</a>
+          </li>';
+          
+          }
+        
     
         
       // Checking that result is declared or not
-      $checkStatus = mysqli_query($conn,"SELECT auctionResult FROM auction_details;");
-      if ($row = mysqli_fetch_array($checkStatus)) {
-          $temp = $row['auctionResult'];
-          if($temp == 0){
-            echo '<li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="resultwaitingpage.php">View Result</a>
+      $checkStatus = mysqli_query($conn,"SELECT auctionResult FROM auction_details WHERE auctionResult=0;");
+      $checkStatusOne = mysqli_query($conn,"SELECT auctionResult FROM auction_details WHERE auctionResult=1;");   
+      if(mysqli_num_rows($checkStatus) > 0){
+
+        echo '<li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="resultwaitingpage.php">Result</a>
+      </li>';
+      }elseif(mysqli_num_rows($checkStatusOne) > 0){
+
+        echo '<li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="result.php">Result</a>
           </li>';
-          }
-          else{
-            echo '<li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="result.php">View Result</a>
-          </li>';
-          }
-        }
+      }
+      else{
+        echo '<li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="resultwaitingpage.php">Result</a>
+      </li>';
+      
+      }
+        
 
       
         echo '<li class="nav-item">
@@ -125,7 +153,7 @@
           Login
         </a>
         <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
-          <li><a class='dropdown-item' href='../XBID/adminlogin.php'> Admin (private)</a></li>
+          <li><a class='dropdown-item' href='../XBID/adminlogin.php'> Admin</a></li>
           <li><a class='dropdown-item' href='../XBID/userlogin.php'> User</a></li>
           <li><a class='dropdown-item' href='../XBID/ownerlogin.php'> Owner</a></li>
 

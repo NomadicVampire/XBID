@@ -48,10 +48,10 @@
         <h2 class="text-center">Welcome Admin !</h2>
         <br>
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Your Email Sir" name = "Email" required="required">
+            <input type="text" class="form-control" placeholder="Your Email" name = "Email" required="required">
         </div>
         <div class="form-group">
-            <input type="password" class="form-control" placeholder="Your Password Sir" name = "Pwd" required="required">
+            <input type="password" class="form-control" placeholder="Your Password" name = "Pwd" required="required">
         </div>
         <?php
 
@@ -81,7 +81,5 @@ if (isset($_GET['error'])) {
 </body>
 </html>
 <?php
-
   include_once 'assets/footer.php';
-
 ?>

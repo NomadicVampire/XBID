@@ -109,6 +109,13 @@ p1 {
                       
 
 ?>
+<?php
+if (isset($_GET['error'])) {
+	if ($_GET['error']== 'auctionResultPublished') {
+	 echo "<p style = 'color:green; text-align:center;'>  Result Published!</p>";
+	}}
+
+?>
       <div class="button1">
       <form action="includes/admin-fetch-clear-publish.inc.php" method="post">
       <button type="submit" name="pub-result" class="btn btn-primary btn-lg"><h3>Publish Result</h3></button>
