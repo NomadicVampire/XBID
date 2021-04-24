@@ -1,6 +1,7 @@
 <?php
   session_start();
   $usercount =1;
+  include_once './includes/dbh.inc.php';
 ?>
 
 <!DOCTYPE html>
@@ -42,12 +43,7 @@
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
       <ul class="navbar-nav">
-      <!-- <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Services</a>
-        </li>
-      <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Contact</a>
-        </li> -->
+      
       <?php
 
       if(isset($_SESSION["userid"])){
@@ -70,12 +66,42 @@
         echo '<li class="nav-item">
         <a class="nav-link active" aria-current="page" href="userprofilelist.php">Players</a>
       </li>';
-        echo '<li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="auction.php?uid='.$usercount .'">Join Auction</a>
-      </li>';
-      echo '<li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="result.php">View Result</a>
-      </li>';
+
+      
+      // Checking that auction start or not
+      $checkStatus = mysqli_query($conn,"SELECT auctionStatus FROM auction_details;");
+      if ($row = mysqli_fetch_array($checkStatus)) {
+          $temp = $row['auctionStatus'];
+          if($temp == 0){
+            echo '<li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="waitingpage.php">Join Auction</a>
+          </li>';
+          }
+          else{
+          echo '<li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="auction.php?uid='.$usercount .'">Join Auction</a>
+              </li>';
+          }
+        }
+    
+        
+      // Checking that result is declared or not
+      $checkStatus = mysqli_query($conn,"SELECT auctionResult FROM auction_details;");
+      if ($row = mysqli_fetch_array($checkStatus)) {
+          $temp = $row['auctionResult'];
+          if($temp == 0){
+            echo '<li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="resultwaitingpage.php">View Result</a>
+          </li>';
+          }
+          else{
+            echo '<li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="result.php">View Result</a>
+          </li>';
+          }
+        }
+
+      
         echo '<li class="nav-item">
         <a class="nav-link active" aria-current="page" href="includes/ownerlogout.inc.php">Logout</a>
       </li>';

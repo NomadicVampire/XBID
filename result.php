@@ -39,7 +39,7 @@ p1 {
   background: linear-gradient(90deg, #000, #fff, #000);
   background-repeat: repeat;
   background-size: 80%;
-  animation: animate 3s linear infinite;
+  animation: animate 1.5s linear 1;
   -webkit-background-clip: text;
   -webkit-text-fill-color: rgba(255, 255, 255, 0);
   display: flex;

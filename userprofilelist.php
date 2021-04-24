@@ -6,7 +6,11 @@
 <style>
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
 
- 
+ #profile{
+  background: #009FFF;
+background: linear-gradient(to right, #ec2F4B, #009FFF);
+padding-left:30px;
+ }
  .containers1 {
     display: inline-block;
     width: 460px;
@@ -26,8 +30,8 @@
 
  .card {
   margin: 30px auto;
-  width: 330px;
-  height: 355px;
+  width: 300px;
+  height: 350px;
   padding: .5rem 1rem;
   background-color: #d6436c0f;
   border-radius: 8px;
@@ -48,7 +52,7 @@ p {
 
 </style> 
 
-<section>
+<section id="profile">
 <title>Players | XBID</title>
 <!-- CSS only -->
 <?php

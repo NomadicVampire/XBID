@@ -45,32 +45,34 @@
 <body>
 <div class="login-form">
     <form action="includes/adminlogin.inc.php" method="post">
-        <h2 class="text-center">Welcome Admin! i am all yours xD!</h2>       
+        <h2 class="text-center">Welcome Admin !</h2>
+        <br>
         <div class="form-group">
             <input type="text" class="form-control" placeholder="Your Email Sir" name = "Email" required="required">
         </div>
         <div class="form-group">
             <input type="password" class="form-control" placeholder="Your Password Sir" name = "Pwd" required="required">
         </div>
-        <div class="form-group">
-            <button type="submit" name="submit-login-admin" class="btn btn-primary btn-block">Log in</button>
-        </div>
-
         <?php
 
 if (isset($_GET['error'])) {
 	if ($_GET['error']== 'InvalidEmail') {
 	 echo "<p style = 'color:red;'>Invalid Email ID</p>";
 	}
-	elseif ($_GET['error']== 'WrongPassword') {
+	elseif ($_GET['error']== 'wrongadminpwd') {
 	echo "<p style = 'color:red;'>Wrong password. Try again </p>";
 	}
 }
     ?>
+        <div class="form-group">
+            <button type="submit" name="submit-login-admin" class="btn btn-primary btn-block">Log in</button>
+        </div>
+
+        
 
         <div class="clearfix">
             <label class="float-left form-check-label"><input type="checkbox">Remember me</label>
-            <a href="#" class="float-right">Forgot Password?</a>
+            
         </div>  
 
 

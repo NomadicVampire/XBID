@@ -13,7 +13,10 @@
     <title>Waiting</title>
 </head>
 <style>
-
+*{
+    margin:0px;
+    /* padding:0px; */
+}
 .border{
 	padding: 5px;
 	background: linear-gradient(110deg, #ffeead 33%, rgba(0, 0, 0, 0) 33%), linear-gradient(110deg, #C5E7D7 36%, #88d8b0 34%);
@@ -67,7 +70,6 @@
 	}
 	
 }
-
 #conts{
     background-color : #312f2f2e;
 }
@@ -78,6 +80,7 @@
     margin-left: 35%;
 	margin-right:40%;
 	margin-top: 0%;
+    
 }
 
 </style>
@@ -88,8 +91,8 @@
 <div class="main">
 	<div class = "border">
 		<div class = "inner-cutout"> 
-			<h1 class="knockout">WAIT </h1><br>
-            <h3 class="knockout">Auction is yet to Start</h3>
+			<h1 class="knockout">WAIT !</h1><br>
+            <h3 class="knockout">Result is yet to be declared !</h3>
         </div>
 	</div>
 </div>

@@ -45,7 +45,7 @@
 <body>
 <div class="login-form">
     <form action="includes/userlogin.inc.php" method="post">
-        <h2 class="text-center">Welcome Back! User</h2>       
+        <h2 class="text-center">Welcome User!</h2>       
         <div class="form-group">
             <input type="text" class="form-control" placeholder="In Game Name" name = "userign" required="required">
         </div>

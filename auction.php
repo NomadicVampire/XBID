@@ -61,9 +61,9 @@
     height:10vh;
     line-height: 90vh;
 	color: white;
-    border: blue solid 2px;
+    border: black solid 2px;
     border-radius: 10px;
-	background-color: black;
+	background-color: #312e2e7d;
     box-shadow: 0 12px 32px 4px rgb(41 36 36 / 94%);
 	font-family: 'Cinzel', serif;
 	font-weight: 800;  
@@ -147,7 +147,6 @@ form{
 <?php
 
 include_once 'includes/dbh.inc.php';
-
 
 //user sql 
 $sql = "SELECT * FROM user_details WHERE userID = $usercount;";

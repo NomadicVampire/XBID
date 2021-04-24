@@ -490,7 +490,7 @@ function adminFetchDetails($conn){
     $sql = "INSERT INTO auction_details (userID, userIGN, basePrice, initialBase) SELECT userId, userInGameName, userBasePrice, userBasePrice FROM user_details;";
     $stmt = mysqli_stmt_init($conn); //Initializes a statement and returns an object for use with mysqli_stmt_prepare
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../admin.php?error=stmtFailedFD");
+        header("location: ../admin.php?error=auctionDetailsNOTUpdated");
    } 
     mysqli_stmt_execute($stmt); //Executes a prepared statement
     mysqli_stmt_close($stmt);
@@ -502,7 +502,7 @@ function adminClearDetails($conn){
     $sql = "TRUNCATE TABLE auction_details ;";
     $stmt = mysqli_stmt_init($conn); //Initializes a statement and returns an object for use with mysqli_stmt_prepare
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../admin.php?error=stmtFailedCD");
+        header("location: ../admin.php?error=auctionDetailsNOTCleared");
    } 
     mysqli_stmt_execute($stmt); //Executes a prepared statement
     mysqli_stmt_close($stmt);

@@ -45,7 +45,7 @@
 <body>
 <div class="login-form">
     <form action="includes/ownerlogin.inc.php" method="post">
-        <h2 class="text-center">Welcome Back! Owner </h2>       
+        <h2 class="text-center">Welcome Owner! </h2>       
         <div class="form-group">
             <input type="text" name="ownerteamname" class="form-control" placeholder="Team Name" required="required">
         </div>

@@ -40,7 +40,8 @@ body {
 	color: #9ba5a8;
 	border-radius: 3px;
 	margin-bottom: 15px;
-	background: #fff;
+		background-color: #f8f9d2;
+    background-image: linear-gradient(315deg, #f8f9d2 0%, #e8dbfc 84%); 
 	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
 	padding: 30px;
 }
@@ -153,7 +154,13 @@ if (isset($_GET['error'])) {
         </div>
 		<p class="small text-center">By clicking the Sign Up button, you agree to our <br><a href="t&c.php">Terms &amp; Conditions</a>, and <a href="t&c.php">Privacy Policy</a>.</p>
     </form>
+	<form style="background:white">
 	<div class="text-center">Already have an account? <a href="../XBID/ownerlogin.php">Login here</a></div>
-</div>
+</form></div>
 </body>
 </html>
+<?php
+
+  include_once 'assets/footer.php';
+
+?>
