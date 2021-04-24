@@ -115,6 +115,30 @@ span{
 p{
     font-family: 'Original Surfer', cursive;
 }
+form{
+    display: flex;
+}
+.abc{
+    margin-left: 70px;
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s
+}
 
 
 </style>
@@ -200,8 +224,25 @@ if (mysqli_num_rows($auction_results) > 0 ) {
              <ul class="list-group-bid">
                  <h3 id = "timer">Time Left : <span id="countdowntimer">15</span>sec</h3>
                  <br>
-                 <br>
                  <li class="name">Current Bid : <a class="details"><?php echo $bPrice; ?></a></li><br> <!--  here we add php tag and add finalPrice variable -->
+                 <li>
+                
+                <?php
+
+                // ERROR and SUCCESS messages
+                if (isset($_GET['error'])) {
+                if ($_GET['error']== 'intergerError') {
+                echo "<p style = 'color:red;'>Please enter a VALID Bid Amount</p>";
+                }
+                if ($_GET['error']== 'bidamtError') {
+                echo "<p style = 'color:red;'>Please enter a bid value greater than Current Price</p>";
+                }
+                if ($_GET['error']== 'bidPlaced') {
+                echo "<p style = 'color:green;'>Your Bid is placed successfully !</p>";
+                }
+            }
+                ?>
+            </li>
                  <div class="stats">
                 <div class="col-3">
                     <p class="head">Current Owner</p>
@@ -214,26 +255,8 @@ if (mysqli_num_rows($auction_results) > 0 ) {
                 <div class="col-3">
                     <p class="head">Total Bid</p>
                     <p>100</p>
-                </div>
-                
-                    <?php
-
-                    // ERROR and SUCCESS messages
-                    if (isset($_GET['error'])) {
-                    if ($_GET['error']== 'intergerError') {
-                    echo "<p style = 'color:red;'>Please enter a VALID Bid Amount</p>";
-                    }
-                    if ($_GET['error']== 'bidamtError') {
-                    echo "<p style = 'color:red;'>Please enter a bid value greater than Current Price</p>";
-                    }
-                    if ($_GET['error']== 'bidPlaced') {
-                    echo "<p style = 'color:green;'>Your Bid is placed successfully !</p>";
-                    }
-                }
-
-                    ?>
-                </div>
-                <br>
+               </div>
+               </div>
                 <br>
                 
 
@@ -248,7 +271,8 @@ if (mysqli_num_rows($auction_results) > 0 ) {
                 
                 
                 </form>
-                </div>";
+                </div>
+                <br>";
 
 
 
@@ -259,7 +283,7 @@ if (mysqli_num_rows($auction_results) > 0 ) {
                       if ($row = mysqli_fetch_array($previous)) {
                         //   echo "prev executed";
                         //   $usercount--;
-                          echo '<a href="auction.php?uid='.$row['userID'].'"><button type="button">Previous</button></a>';
+                          echo '<a href="auction.php?uid='.$row['userID'].'"><button type="button" class="abc">Previous</button></a>';
                       }
           
                     // NEXT button 
@@ -268,7 +292,7 @@ if (mysqli_num_rows($auction_results) > 0 ) {
                         // echo "next executed";
                         // $usercount++;
                         // echo $usercount;
-                        echo '<a href="auction.php?uid='.$row['userID'].'"><button type="button">Next</button></a>';
+                        echo '<a href="auction.php?uid='.$row['userID'].'"><button type="button" class="abc">Next</button></a>';
                     }
 
 

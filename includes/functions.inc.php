@@ -344,7 +344,7 @@ function loginOwner($conn,$ownername,$ownerpwd){
     }
 }
 
-//   ----------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------
 //                                                         ADMIN LOGIN
 //--------------------------------------------------------------------------------------------------------
 
@@ -365,7 +365,7 @@ function adminExists($conn,$adminEmail){
 
     if ($row = mysqli_fetch_assoc($resultData)) {
         return $row;
-    } //Fetch a result row as an associative array
+    } 
     else {
         $result = false;
         return $result;
@@ -405,8 +405,12 @@ function loginAdmin($conn,$adminEmail,$adminPwd){
     }
  }
 
- // END --ADMIN ----
- function intergerCheck($bid){
+ //--------------------------------------------------------------------------------------------------------
+//                           BID 
+//--------------------------------------------------------------------------------------------------------
+ 
+
+function intergerCheck($bid){
     $result;
     if (preg_match('/^[1-9][0-9]{0,3}$/', $bid)) {
         return $result = true;
@@ -474,4 +478,69 @@ function returnbidvalue($conn,$baseP,$tna){
     mysqli_stmt_execute($stmt); //Executes a prepared statement
     mysqli_stmt_close($stmt);
     
+}
+
+
+//--------------------------------------------------------------------------------------------------------
+//                        ADMIN FETCH and CLEAR functions
+//--------------------------------------------------------------------------------------------------------
+
+
+function adminFetchDetails($conn){
+    $sql = "INSERT INTO auction_details (userID, userIGN, basePrice, initialBase) SELECT userId, userInGameName, userBasePrice, userBasePrice FROM user_details;";
+    $stmt = mysqli_stmt_init($conn); //Initializes a statement and returns an object for use with mysqli_stmt_prepare
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../admin.php?error=stmtFailedFD");
+   } 
+    mysqli_stmt_execute($stmt); //Executes a prepared statement
+    mysqli_stmt_close($stmt);
+    header("location: ../admin.php?error=auctionDetailsUpdated");
+    exit();
+}
+
+function adminClearDetails($conn){
+    $sql = "TRUNCATE TABLE auction_details ;";
+    $stmt = mysqli_stmt_init($conn); //Initializes a statement and returns an object for use with mysqli_stmt_prepare
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../admin.php?error=stmtFailedCD");
+   } 
+    mysqli_stmt_execute($stmt); //Executes a prepared statement
+    mysqli_stmt_close($stmt);
+    header("location: ../admin.php?error=auctionDetailsCleared");
+    exit();
+}
+function auctionStart($conn){
+    $sql = "UPDATE auction_details SET auctionStatus = 1;";
+    $stmt = mysqli_stmt_init($conn); //Initializes a statement and returns an object for use with mysqli_stmt_prepare
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../admin.php?error=auctionNOTstarted");
+   } 
+    mysqli_stmt_execute($stmt); //Executes a prepared statement
+    mysqli_stmt_close($stmt);
+    header("location: ../admin.php?error=auctionStarted");
+    exit();
+}
+function auctionStop($conn){
+    $sql = "UPDATE auction_details SET auctionStatus = 0;";
+    $stmt = mysqli_stmt_init($conn); //Initializes a statement and returns an object for use with mysqli_stmt_prepare
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../admin.php?error=auctionNOTstopped");
+   } 
+    mysqli_stmt_execute($stmt); //Executes a prepared statement
+    mysqli_stmt_close($stmt);
+    header("location: ../admin.php?error=auctionStopped");
+    exit();
+}
+
+function publishResult($conn){
+    $sql = "UPDATE auction_details SET auctionResult = 1;";
+    $stmt = mysqli_stmt_init($conn); //Initializes a statement and returns an object for use with mysqli_stmt_prepare
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../adminresult.php?error=auctionResultNotPublished");
+   } 
+    mysqli_stmt_execute($stmt); //Executes a prepared statement
+    mysqli_stmt_close($stmt);
+    header("location: ../adminresult.php?error=auctionResultPublished");
+    exit();
+
 }

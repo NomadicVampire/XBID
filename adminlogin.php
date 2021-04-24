@@ -69,14 +69,13 @@ if (isset($_GET['error'])) {
     ?>
 
         <div class="clearfix">
-            <label class="float-left form-check-label"><input type="checkbox"> Remember me</label>
+            <label class="float-left form-check-label"><input type="checkbox">Remember me</label>
             <a href="#" class="float-right">Forgot Password?</a>
         </div>  
 
 
     </form>
-    <p class="text-center"><a href="../XBID/usersignup.php">Create an Account. Sign Up Here !</a></p>
-</div>
+    
 </body>
 </html>
 <?php

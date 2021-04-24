@@ -1,6 +1,8 @@
+<!-- Result page for Admin -->
 <?php
 
   include_once 'assets/header.php';
+  include_once 'includes/dbh.inc.php';
 
 ?>
 <!DOCTYPE html>
@@ -73,14 +75,44 @@ p1 {
 </style>
 <body>
     <header class="header">
-      <p1>Welcome Admin</p1>
+      <p1>Results</p1><br>
 
+      <!-- Fetching Data for Table -->
+<?php
+    
+        $sql = mysqli_query($conn,"SELECT * FROM auction_details;");
+        
+        echo '<table class="table table-dark">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">InGameName</th>
+            <th scope="col">Team Name</th>
+            <th scope="col">Sold At</th>
+          </tr>
+        </thead>
+        <tbody>';
+        if (mysqli_num_rows($sql) > 0 ){
+       
+            
+        while ($row = mysqli_fetch_assoc($sql)) {
+            // echo "<tr><td>".$row["userIGN"]."</td><td>".$row["teamName"]." ".$row["finalPrice"]."</td></tr>";
+            echo '<tr>
+            <td>'.$row["userIGN"].'</td>
+            <td>'.$row["teamName"].'</td>
+            <td>'.$row["finalPrice"].'</td>
+          </tr>';
+        }
+        echo ' </tbody>
+        </table>';
+        }
+                        
+                      
+
+?>
       <div class="button1">
       <form action="includes/admin-fetch-clear-publish.inc.php" method="post">
-      <button type="submit" name="start" class="btn btn-primary btn-lg"><h3>Start Auction</h3></button>
-      <button type="submit" name="stop" class="btn btn-primary btn-lg"><h3>Stop Auction</h3></button>
-      <button type="submit" name="fetch" class="btn btn-primary btn-sm"> <h3>Fetch Data</h3></button>
-      <button type="submit" name="clear" class="btn btn-primary btn-sm"><h3>Clear Record</h3></button>
+      <button type="submit" name="pub-result" class="btn btn-primary btn-lg"><h3>Publish Result</h3></button>
+      
       </form>
       </div>
     </header>

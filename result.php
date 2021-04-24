@@ -1,6 +1,8 @@
+<!-- Result page for Admin -->
 <?php
 
   include_once 'assets/header.php';
+  include_once 'includes/dbh.inc.php';
 
 ?>
 <!DOCTYPE html>
@@ -9,87 +11,110 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Result</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
+    <title>Administration</title>
 </head>
 <style>
-    @import url('https://fonts.googleapis.com/css?family=Roboto:300');
-
- .main{
-  text-align:center;
-  background:linear-gradient(141deg, #ccc 25%, #eee 40%, #ddd 55%);
-  color:#555;
-  font-family:'Roboto';
-  font-weight:300;
-  font-size:32px;
-  padding-top:5vh;
-  height:64vh;
-  overflow:hidden;
-  -webkit-backface-visibility: hidden;
-  -webkit-perspective: 1000;
-  -webkit-transform: translate3d(0,0,0);
+  .header{
+    min-height: 65px;
+    background-color: #f8ceec;
+    background-image: linear-gradient(315deg, #f8ceec 0%, #a88beb 74%);
+  }
+  body {
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-.result {
-  display:inline-block;
-  overflow:hidden;
-  white-space:nowrap;
+p1 {
+  position: relative;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  font-size: 2em;
+  letter-spacing: 4px;
+  overflow: hidden;
+  background: linear-gradient(90deg, #000, #fff, #000);
+  background-repeat: repeat;
+  background-size: 80%;
+  animation: animate 3s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
 }
 
-.result:first-of-type {    
-  animation: showup 7s infinite;
+@keyframes animate {
+  0% {
+    background-position: -500%;
+  }
+  100% {
+    background-position: 500%;
+  }
 }
-
-.result:last-of-type {
-  width:0px;
-  animation: reveal 7s infinite;
+.button{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 100px;
+      font-family: 'Architects Daughter', cursive;
 }
-
-.result:last-of-type span {
-  margin-left:-355px;
-  animation: slidein 7s infinite;
-}
-
-@keyframes showup {
-    0% {opacity:0;}
-    20% {opacity:1;}
-    80% {opacity:1;}
-    100% {opacity:0;}
-}
-
-@keyframes slidein {
-    0% { margin-left:-800px; }
-    20% { margin-left:-800px; }
-    35% { margin-left:0px; }
-    100% { margin-left:0px; }
-}
-
-@keyframes reveal {
-    0% {opacity:0;width:0px;}
-    20% {opacity:1;width:0px;}
-    30% {width:355px;}
-    80% {opacity:1;}
-    100% {opacity:0;width:355px;}
+.button1{
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding-top: 100px;
+      font-family: 'Architects Daughter', cursive;
 }
 
 
-p {
-  font-size:12px;
-  color:#999;
-  margin-top:200px;
-}
 </style>
 <body>
-    <div class="main">
-    <div class="result"></div> 
-        <div class="result"> 
-        <span>Result</span>
-        </div> 
-    </div>
-              
+    <header class="header">
+      <p1>Results</p1><br>
+
+      <!-- Fetching Data for Table -->
+<?php
+    
+        $sql = mysqli_query($conn,"SELECT * FROM auction_details;");
+        
+        echo '<table class="table table-dark">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">InGameName</th>
+            <th scope="col">Team Name</th>
+            <th scope="col">Sold At</th>
+          </tr>
+        </thead>
+        <tbody>';
+        if (mysqli_num_rows($sql) > 0 ){
+       
+            
+        while ($row = mysqli_fetch_assoc($sql)) {
+            // echo "<tr><td>".$row["userIGN"]."</td><td>".$row["teamName"]." ".$row["finalPrice"]."</td></tr>";
+            echo '<tr>
+            <td>'.$row["userIGN"].'</td>
+            <td>'.$row["teamName"].'</td>
+            <td>'.$row["finalPrice"].'</td>
+          </tr>';
+        }
+        echo ' </tbody>
+        </table>';
+        }
+                        
+                      
+
+?>
+      
+    </header>
 </body>
 </html>
 <?php
 
-include_once 'assets/footer.php';
+  include_once 'assets/footer.php';
 
 ?>

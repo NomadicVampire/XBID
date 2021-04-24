@@ -42,18 +42,21 @@
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
       <ul class="navbar-nav">
-      <li class="nav-item">
+      <!-- <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Services</a>
         </li>
       <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Contact</a>
-        </li>
+        </li> -->
       <?php
 
       if(isset($_SESSION["userid"])){
         // if User is logged in
         echo '<li class="nav-item">
         <a class="nav-link active" aria-current="page" href="userprofile.php">Profile</a>
+      </li>';
+        echo '<li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="result.php">View Result</a>
       </li>';
         echo '<li class="nav-item">
         <a class="nav-link active" aria-current="page" href="includes/userlogout.inc.php">Log Out</a>
@@ -70,8 +73,23 @@
         echo '<li class="nav-item">
         <a class="nav-link active" aria-current="page" href="auction.php?uid='.$usercount .'">Join Auction</a>
       </li>';
+      echo '<li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="result.php">View Result</a>
+      </li>';
         echo '<li class="nav-item">
         <a class="nav-link active" aria-current="page" href="includes/ownerlogout.inc.php">Logout</a>
+      </li>';
+      }
+      else if(isset($_SESSION["adminid"])){
+        // if Admin is logged in
+        echo '<li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="admin.php">Manage Auction</a>
+      </li>';
+        echo '<li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="adminresult.php">Results</a>
+      </li>';
+        echo '<li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="includes/adminlogout.inc.php">Logout</a>
       </li>';
       }
       else{
