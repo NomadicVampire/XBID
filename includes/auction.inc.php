@@ -4,7 +4,6 @@ session_start();
 if (isset($_POST['bid-submit'])) {
     $useriID = $_GET['uid'];
     $baseP = $_GET['bp'];
-    // $remB = $_GET['rb'];
     $tna = $_GET['tn'];
     $bid=$_POST['bid-value'];
     $ownerID=$_SESSION['ownerid'];
@@ -15,7 +14,7 @@ if (isset($_POST['bid-submit'])) {
     include_once 'functions.inc.php';
     
     if (intergerCheck($bid) == false) {
-        header('location: ../auction.php?error=intergerError');
+        header("location: ../auction.php?error=intergerError&uid=$useriID");
         exit();
       }
     //  echo $useriID;
@@ -25,6 +24,7 @@ if (isset($_POST['bid-submit'])) {
     //  echo $baseP;
     //  echo $tna;
     
+  
     if($bid > $baseP){
 
  
@@ -37,7 +37,7 @@ if (isset($_POST['bid-submit'])) {
   }
   else{
 
-    header('location: ../auction.php?error=bidamtError');
+    header("location: ../auction.php?error=bidamtError&uid=$useriID");
   }
 
 }else {

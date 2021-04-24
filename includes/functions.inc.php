@@ -336,6 +336,7 @@ function loginOwner($conn,$ownername,$ownerpwd){
         $_SESSION["ownerEm"] = $OwneruidExists["ownerEmail"];
         $_SESSION["ownerCn"] = $OwneruidExists["ownerContact"];
         $_SESSION["ownerBA"] = $OwneruidExists["ownerBidAmt"];
+        $_SESSION["UserCount"] = 1;
 
         header("location: ../index.php");
         exit();
@@ -437,7 +438,7 @@ function loginAdmin($conn,$adminEmail,$adminPwd){
  }
 
 function returnbidvalue($conn,$baseP,$tna){
-    $sql = "UPDATE owner_details SET ownerBidAmt = ownerBidAmt+$baseP WHERE ownerTeamName = '".$tna."';";
+    $sql = "UPDATE owner_details SET ownerBidAm = ownerBidAmt+$baseP WHERE ownerTeamName = '".$tna."';";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header('location: ../auction.php?error=stmtFailedRV');
@@ -445,7 +446,6 @@ function returnbidvalue($conn,$baseP,$tna){
    } 
    mysqli_stmt_execute($stmt);  //Executes a prepared statement
    mysqli_stmt_close($stmt);
-//    header('location: ../auction.php?error=None');
    
  }
 
@@ -459,7 +459,7 @@ function returnbidvalue($conn,$baseP,$tna){
    mysqli_stmt_execute($stmt);  //Executes a prepared statement
    mysqli_stmt_close($stmt);
     
-    header('location: ../auction.php?error=bidPlaced!');
+    header("location: ../auction.php?error=bidPlaced&uid=$useriID");
    
  }
 
@@ -469,12 +469,9 @@ function returnbidvalue($conn,$baseP,$tna){
     $sql = "UPDATE owner_details SET ownerBidAmt = ownerBidAmt-$bid WHERE ownerId =$ownerID;";
     $stmt = mysqli_stmt_init($conn); //Initializes a statement and returns an object for use with mysqli_stmt_prepare
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header('location: ../auction.php?error=stmtFailed');
-         exit();
+        header("location: ../auction.php?error=stmtFailed");
    } 
-    // mysqli_stmt_bind_param($stmt,"i",$bid); // Binds variables to a prepared statement as parameters
     mysqli_stmt_execute($stmt); //Executes a prepared statement
     mysqli_stmt_close($stmt);
-    // header('location: ../auction.php?error=None');
     
 }

@@ -1,7 +1,7 @@
 <?php
     include_once "assets/header.php";
-    
-    $usercount = 1;
+    include_once 'includes/dbh.inc.php';
+    $usercount= $_GET['uid'];
     $timer = 15;
 ?>
 <!DOCTYPE html>
@@ -14,6 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orelega+One&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Original+Surfer&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>Auction</title>
 </head>
 <style>
@@ -30,8 +31,8 @@
     border: black solid 2px;
     border-radius: 10px;
     height: 400px;
-    background-color: #f9c5d1;
-    background-image: linear-gradient(315deg, #f9c5d1 0%, #9795ef 74%);
+    box-shadow: 0 12px 32px 4px rgb(41 36 36 / 94%);
+    background:linear-gradient(141deg, #ccc 25%, #eee 40%, #ddd 55%);
 }
 .list-group-bid{
     padding-top: 20px;
@@ -40,8 +41,8 @@
     border: black solid 2px;
     border-radius: 10px;
     height: 400px;
-    background-color: #f9c5d1;
-    background-image: linear-gradient(315deg, #f9c5d1 0%, #9795ef 74%);
+    box-shadow: 0 12px 32px 4px rgb(41 36 36 / 94%);
+    background:linear-gradient(141deg, #ccc 25%, #eee 40%, #ddd 55%);
 }
 .details1{
     padding-top: 100px;
@@ -59,12 +60,12 @@
 	text-align: center;
     height:10vh;
     line-height: 90vh;
-	color: red;
+	color: white;
     border: blue solid 2px;
     border-radius: 10px;
-	background-color: #e288f9;
-    background-image: linear-gradient(315deg, #e288f9 0%, #ffc988 74%);
-	font-family: 'Merriweather', serif;
+	background-color: black;
+    box-shadow: 0 12px 32px 4px rgb(41 36 36 / 94%);
+	font-family: 'Cinzel', serif;
 	font-weight: 800;  
 }
 li{
@@ -157,13 +158,13 @@ if (mysqli_num_rows($owner_results) > 0)  {
 
 
 // auction_details sql
-$auction_sql = "SELECT * FROM auction_details ";
+$auction_sql = "SELECT * FROM auction_details WHERE userID = $usercount";
 $auction_results = mysqli_query($conn, $auction_sql);
 
 if (mysqli_num_rows($auction_results) > 0 ) {
     $auction_row = mysqli_fetch_assoc($auction_results) ;
         
-        $iniBasePrice = $auction_row['initialBase'];
+        $iniBasePrice = $auction_row['initialBase'];    
         $tName = $auction_row['teamName'];
         $fPrice = $auction_row['finalPrice'];
         $bPrice = $auction_row['basePrice'];
@@ -216,6 +217,8 @@ if (mysqli_num_rows($auction_results) > 0 ) {
                 </div>
                 
                     <?php
+
+                    // ERROR and SUCCESS messages
                     if (isset($_GET['error'])) {
                     if ($_GET['error']== 'intergerError') {
                     echo "<p style = 'color:red;'>Please enter a VALID Bid Amount</p>";
@@ -223,7 +226,7 @@ if (mysqli_num_rows($auction_results) > 0 ) {
                     if ($_GET['error']== 'bidamtError') {
                     echo "<p style = 'color:red;'>Please enter a bid value greater than Current Price</p>";
                     }
-                    if ($_GET['error']== 'bidPlaced!') {
+                    if ($_GET['error']== 'bidPlaced') {
                     echo "<p style = 'color:green;'>Your Bid is placed successfully !</p>";
                     }
                 }
@@ -234,19 +237,44 @@ if (mysqli_num_rows($auction_results) > 0 ) {
                 <br>
                 
 
-                <?php echo "<div class='valuebid'>
+                <?php 
+                
+                
+                echo "<div class='valuebid'>
                 <span>Bid :</span>
-                <form action='includes/auction.inc.php?uid=".$ID ."&bp=".$bPrice."&tn=".$tName."' method='post'>
+                <form action='includes/auction.inc.php?uid=".$usercount ."&bp=".$bPrice."&tn=".$tName."' method='post'>
                 <input type='text' class='form-control' name = 'bid-value' placeholder='Bid Value'>
                 <button type='submit' name='bid-submit' class='btn btn-primary mb-2'>Bid</button>
-                <button type='submit' name='bid-next' class='btn btn-primary mb-2'><a href='auction.php'>Next</a></button>
-   
+                
+                
                 </form>
                 </div>";
-                 
+
+
+
+           
                 
-                
-                 ?>
+                      // PREVIOIUS button 
+                      $previous = mysqli_query($conn,"SELECT * FROM auction_details WHERE userID<$usercount order by userID DESC;");
+                      if ($row = mysqli_fetch_array($previous)) {
+                        //   echo "prev executed";
+                        //   $usercount--;
+                          echo '<a href="auction.php?uid='.$row['userID'].'"><button type="button">Previous</button></a>';
+                      }
+          
+                    // NEXT button 
+                    $next = mysqli_query($conn,"SELECT * FROM auction_details WHERE userID>$usercount order by userID ASC;");
+                    if ($row = mysqli_fetch_array($next)) {
+                        // echo "next executed";
+                        // $usercount++;
+                        // echo $usercount;
+                        echo '<a href="auction.php?uid='.$row['userID'].'"><button type="button">Next</button></a>';
+                    }
+
+
+
+                ?>
+      
                  
              </ul>
          </div>

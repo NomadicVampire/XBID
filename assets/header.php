@@ -1,5 +1,6 @@
 <?php
   session_start();
+  $usercount =1;
 ?>
 
 <!DOCTYPE html>
@@ -67,7 +68,7 @@
         <a class="nav-link active" aria-current="page" href="userprofilelist.php">Players</a>
       </li>';
         echo '<li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="auction.php">Join Auction</a>
+        <a class="nav-link active" aria-current="page" href="auction.php?uid='.$usercount .'">Join Auction</a>
       </li>';
         echo '<li class="nav-item">
         <a class="nav-link active" aria-current="page" href="includes/ownerlogout.inc.php">Logout</a>
