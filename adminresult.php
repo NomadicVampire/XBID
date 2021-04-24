@@ -45,7 +45,7 @@ p1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 100px;
+  padding-top: 20px;
 }
 
 @keyframes animate {
